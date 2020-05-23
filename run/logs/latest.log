@@ -1,0 +1,272 @@
+[19:58:08] [main/INFO] [GradleStart]: Extra: []
+[19:58:08] [main/INFO] [GradleStart]: Found and added coremod: cr0s.warpdrive.core.FMLLoadingPlugin
+[19:58:08] [main/INFO] [GradleStart]: Running with arguments: [--userProperties, {}, --assetsDir, C:/Users/Rob/.gradle/caches/minecraft/assets, --assetIndex, 1.12, --accessToken{REDACTED}, --version, 1.12.2, --tweakClass, net.minecraftforge.fml.common.launcher.FMLTweaker, --tweakClass, net.minecraftforge.gradle.tweakers.CoremodTweaker]
+[19:58:08] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:58:08] [main/INFO] [LaunchWrapper]: Using primary tweak class name net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:58:08] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.CoremodTweaker
+[19:58:08] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLTweaker
+[19:58:08] [main/INFO] [FML]: Forge Mod Loader version 14.23.5.2847 for Minecraft 1.12.2 loading
+[19:58:08] [main/INFO] [FML]: Java is Java HotSpot(TM) 64-Bit Server VM, version 1.8.0_241, running on Windows 10:amd64:10.0, installed at C:\Program Files\Java\jdk1.8.0_241\jre
+[19:58:09] [main/ERROR] [FML]: Apache Maven library folder was not in the format expected. Using default libraries directory.
+[19:58:09] [main/ERROR] [FML]: Full: C:\Users\Rob\.gradle\caches\modules-2\files-2.1\org.apache.maven\maven-artifact\3.5.3\7dc72b6d6d8a6dced3d294ed54c2cc3515ade9f4\maven-artifact-3.5.3.jar
+[19:58:09] [main/ERROR] [FML]: Trimmed: c:/users/rob/.gradle/caches/modules-2/files-2.1/org.apache.maven/maven-artifact/3.5.3/
+[19:58:09] [main/INFO] [FML]: Managed to load a deobfuscated Minecraft name- we are in a deobfuscated environment. Skipping runtime deobfuscation
+[19:58:09] [main/INFO] [FML]: Detected deobfuscated environment, loading log configs for colored console logs.
+[19:58:09] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLCorePlugin (net.minecraftforge.fml.relauncher.FMLCorePlugin), we are in deobf and it's a forge core plugin
+[19:58:09] [main/INFO] [FML]: Ignoring missing certificate for coremod FMLForgePlugin (net.minecraftforge.classloading.FMLForgePlugin), we are in deobf and it's a forge core plugin
+[19:58:09] [main/INFO] [FML]: Found a command line coremod : cr0s.warpdrive.core.FMLLoadingPlugin
+[19:58:09] [main/INFO] [FML]: Ignoring missing certificate for coremod WarpDriveCore (cr0s.warpdrive.core.FMLLoadingPlugin), as this is probably a dev workspace
+[19:58:09] [main/INFO] [FML]: Searching E:\CodeProjects\ALFO\AFMSpaceUnionMod\run\.\mods for mods
+[19:58:09] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.CoremodTweaker
+[19:58:09] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.fml.relauncher.FMLCorePlugin
+[19:58:09] [main/INFO] [GradleStart]: Injecting location in coremod net.minecraftforge.classloading.FMLForgePlugin
+[19:58:09] [main/INFO] [GradleStart]: Injecting location in coremod cr0s.warpdrive.core.FMLLoadingPlugin
+[19:58:09] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:58:09] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:58:09] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:58:09] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:58:09] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLInjectionAndSortingTweaker
+[19:58:09] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:58:10] [main/ERROR] [FML]: FML appears to be missing any signature data. This is not a good thing
+[19:58:10] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:58:10] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.FMLDeobfTweaker
+[19:58:10] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.relauncher.CoreModManager$FMLPluginWrapper
+[19:58:10] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.gradle.tweakers.AccessTransformerTweaker
+[19:58:11] [main/INFO] [GradleStart]: Remapping AccessTransformer rules...
+[19:58:11] [main/INFO] [LaunchWrapper]: Loading tweak class name net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:58:11] [main/INFO] [LaunchWrapper]: Calling tweak class net.minecraftforge.fml.common.launcher.TerminalTweaker
+[19:58:11] [main/INFO] [LaunchWrapper]: Launching wrapped minecraft {net.minecraft.client.main.Main}
+[19:58:11] [main/INFO] [WarpDriveCore]: Successful injection in net/minecraft/client/multiplayer/WorldClient
+[19:58:11] [main/INFO] [WarpDriveCore]: Successful injection in net/minecraft/entity/EntityLivingBase
+[19:58:11] [Client thread/INFO] [net.minecraft.client.Minecraft]: Setting user: Player95
+[19:58:11] [Client thread/INFO] [WarpDriveCore]: Successful injection in net/minecraft/entity/item/EntityItem
+[19:58:13] [Client thread/INFO] [net.minecraft.client.Minecraft]: LWJGL Version: 2.9.4
+[19:58:14] [Client thread/INFO] [FML]: Could not load splash.properties, will create a default one
+[19:58:14] [Client thread/INFO] [FML]: -- System Details --
+Details:
+	Minecraft Version: 1.12.2
+	Operating System: Windows 10 (amd64) version 10.0
+	Java Version: 1.8.0_241, Oracle Corporation
+	Java VM Version: Java HotSpot(TM) 64-Bit Server VM (mixed mode), Oracle Corporation
+	Memory: 167583808 bytes (159 MB) / 380633088 bytes (363 MB) up to 1900019712 bytes (1812 MB)
+	JVM Flags: 0 total; 
+	IntCache: cache: 0, tcache: 0, allocated: 0, tallocated: 0
+	FML: 
+	Loaded coremods (and transformers): 
+WarpDriveCore (warpdrive.jar)
+  cr0s.warpdrive.core.ClassTransformer
+	GL info: ' Vendor: 'NVIDIA Corporation' Version: '4.6.0 NVIDIA 440.97' Renderer: 'GeForce GTX 680/PCIe/SSE2'
+[19:58:14] [Client thread/INFO] [FML]: MinecraftForge v14.23.5.2847 Initialized
+[19:58:14] [Client thread/INFO] [FML]: Starts to replace vanilla recipe ingredients with ore ingredients.
+[19:58:15] [Client thread/INFO] [FML]: Invalid recipe found with multiple oredict ingredients in the same ingredient...
+[19:58:15] [Client thread/INFO] [FML]: Replaced 1227 ore ingredients
+[19:58:15] [Client thread/ERROR] [WarpDriveCore]: Transformation failed for net/minecraftforge/common/ForgeHooks (0/1), aborting...
+[19:58:15] [Client thread/INFO] [FML]: Searching E:\CodeProjects\ALFO\AFMSpaceUnionMod\run\.\mods for mods
+[19:58:17] [Thread-3/INFO] [FML]: Using sync timing. 200 frames of Display.update took 392435984 nanos
+[19:58:17] [Client thread/INFO] [FML]: Forge Mod Loader has identified 8 mods to load
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:17] [Client thread/WARN] [FML]: * The API Galacticraft API from source E:\CodeProjects\ALFO\AFMSpaceUnionMod\libs\gccore.jar is loaded from an incompatible classloader. THIS WILL NOT WORK!
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager$APIContainer.validate(ModAPIManager.java:114)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.registerDataTableAndParseAPI(ModAPIManager.java:174)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.ModAPIManager.manageAPI(ModAPIManager.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:569)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232)
+[19:58:17] [Client thread/WARN] [FML]: *  at net.minecraft.client.Minecraft.init(Minecraft.java:514)...
+[19:58:17] [Client thread/WARN] [FML]: ****************************************
+[19:58:18] [Client thread/FATAL] [FML]: net.minecraftforge.fml.common.MissingModsException: Mod galacticraftcore (Galacticraft Core) requires [micdoodlecore]
+[19:58:18] [Client thread/ERROR] [FML]: An exception was thrown, the game will display an error screen and halt.
+net.minecraftforge.fml.common.MissingModsException: Mod galacticraftcore (Galacticraft Core) requires [micdoodlecore]
+	at net.minecraftforge.fml.common.Loader.sortModList(Loader.java:266) ~[Loader.class:?]
+	at net.minecraftforge.fml.common.Loader.loadMods(Loader.java:572) ~[Loader.class:?]
+	at net.minecraftforge.fml.client.FMLClientHandler.beginMinecraftLoading(FMLClientHandler.java:232) [FMLClientHandler.class:?]
+	at net.minecraft.client.Minecraft.init(Minecraft.java:514) [Minecraft.class:?]
+	at net.minecraft.client.Minecraft.run(Minecraft.java:422) [Minecraft.class:?]
+	at net.minecraft.client.main.Main.main(Main.java:118) [Main.class:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_241]
+	at net.minecraft.launchwrapper.Launch.launch(Launch.java:135) [launchwrapper-1.12.jar:?]
+	at net.minecraft.launchwrapper.Launch.main(Launch.java:28) [launchwrapper-1.12.jar:?]
+	at sun.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[?:1.8.0_241]
+	at sun.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[?:1.8.0_241]
+	at sun.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[?:1.8.0_241]
+	at java.lang.reflect.Method.invoke(Method.java:498) ~[?:1.8.0_241]
+	at net.minecraftforge.gradle.GradleStartCommon.launch(GradleStartCommon.java:97) [start/:?]
+	at GradleStart.main(GradleStart.java:25) [start/:?]
+[19:58:18] [Client thread/WARN] [FML]: EventBus 0 shutting down - future events will not be posted.
+[19:58:18] [Client thread/INFO] [net.minecraft.client.resources.SimpleReloadableResourceManager]: Reloading ResourceManager: Default, FMLFileResourcePack:Forge Mod Loader, FMLFileResourcePack:Minecraft Forge, FMLFileResourcePack:Galacticraft Core, FMLFileResourcePack:WarpDrive, FMLFileResourcePack:AFMSpaceUnionMod
+[19:58:18] [Client thread/INFO] [WarpDriveCore]: Successful injection in net/minecraft/client/renderer/RenderGlobal
+[19:58:18] [Client thread/WARN] [FML]: There were errors previously. Not beginning mod initialization phase
+[19:58:21] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Starting up SoundSystem...
+[19:58:21] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: Initializing LWJGL OpenAL
+[19:58:21] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: (The LWJGL binding of OpenAL.  For more information, see http://www.lwjgl.org)
+[19:58:21] [Thread-5/INFO] [net.minecraft.client.audio.SoundManager]: OpenAL initialized.
+[19:58:21] [Sound Library Loader/INFO] [net.minecraft.client.audio.SoundManager]: Sound engine started
+[19:58:22] [Client thread/INFO] [com.mojang.text2speech.NarratorWindows]: Narrator library for x64 successfully loaded
+[19:58:23] [Realms Notification Availability checker #1/INFO] [com.mojang.realmsclient.client.RealmsClient]: Could not authorize you against Realms server: Invalid session id
+[19:58:58] [Client thread/INFO] [net.minecraft.client.Minecraft]: Stopping!
+[19:58:58] [Client thread/INFO] [net.minecraft.client.audio.SoundManager]: SoundSystem shutting down...
+[19:58:58] [Client thread/WARN] [net.minecraft.client.audio.SoundManager]: Author: Paul Lamb, www.paulscode.com
