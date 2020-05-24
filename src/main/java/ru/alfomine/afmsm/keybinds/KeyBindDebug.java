@@ -1,12 +1,10 @@
 package ru.alfomine.afmsm.keybinds;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.settings.KeyBinding;
 import net.minecraftforge.fml.common.gameevent.InputEvent.KeyInputEvent;
 import org.lwjgl.input.Keyboard;
 import ru.alfomine.afmsm.MenuPlanet;
-import ru.alfomine.afmsm.gui.GuiMinigame;
 import ru.alfomine.afmsm.gui.GuiPlanetSelection;
 import ru.alfomine.afmsm.keybinds.KeyBinder.KeyBind;
 
@@ -18,7 +16,10 @@ public class KeyBindDebug implements KeyBind {
 	public void onPress(KeyInputEvent event) {
 		ArrayList<MenuPlanet> testList = new ArrayList<>();
 		
-		testList.add(new MenuPlanet("earth"));
+		testList.add(new MenuPlanet("earth", 0));
+		testList.add(new MenuPlanet("moon", 1));
+		testList.add(new MenuPlanet("mars", 2));
+		testList.add(new MenuPlanet("123", 0));
 		
 		Minecraft.getMinecraft().displayGuiScreen(new GuiPlanetSelection(testList));
 	}

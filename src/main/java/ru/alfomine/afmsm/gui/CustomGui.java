@@ -1,12 +1,9 @@
 package ru.alfomine.afmsm.gui;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class CustomGui extends GuiScreen {
@@ -27,5 +24,9 @@ public class CustomGui extends GuiScreen {
 		worldRenderer.pos(x + width, y, this.zLevel).tex((u + uWidth) * texModX, (v + height1) * texModY).endVertex();
 		worldRenderer.pos(x, y, this.zLevel).tex((u + width0) * texModX, (v + height1) * texModY).endVertex();
 		tessellator.draw();
+	}
+	
+	public int center(int a, int b) {
+		return (b - a) / 2;
 	}
 }
