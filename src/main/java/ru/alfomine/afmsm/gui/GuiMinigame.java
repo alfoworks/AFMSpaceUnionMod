@@ -1,15 +1,11 @@
 package ru.alfomine.afmsm.gui;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import org.lwjgl.input.Mouse;
 
 import javax.vecmath.Vector2d;
 import java.io.IOException;
@@ -80,10 +76,6 @@ public class GuiMinigame extends CustomGui {
 	}
 	
 	// =========== //
-	
-	private int center(int a, int b) {
-		return (b - a) / 2;
-	}
 	
 	enum Direction {
 		UP,
