@@ -1,0 +1,7 @@
+afmsm.text.gui_planetselection.title=Choose Your Planet
+afmsm.text.gui_planetselection.button_select=Select
+afmsm.text.gui_planetselection_confirm.button.no=I've changed my mind...
+afmsm.text.gui_planetselection_confirm.button.yes=Yes!
+afmsm.text.gui_planetselection_confirm.warn=Are you completely sure?%sYou'll never be able to change your selection on this account anymore.
+afmsm.text.gui_planetselection_confirm.title=Confirm your choice
+item.solaratlas.name=SolarAtlas
