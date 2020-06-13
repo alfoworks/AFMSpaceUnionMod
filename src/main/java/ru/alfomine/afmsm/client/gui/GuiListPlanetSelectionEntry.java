@@ -4,16 +4,16 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import org.lwjgl.opengl.GL11;
-import ru.alfomine.afmsm.planet.PlanetData;
+import ru.alfomine.afmsm.planet.Planet;
 
 import java.awt.*;
 
 public class GuiListPlanetSelectionEntry implements IGuiListEntry {
 	
-	PlanetData planet;
+	Planet planet;
 	GuiPlanetSelection gui;
 	
-	public GuiListPlanetSelectionEntry(PlanetData planet, GuiPlanetSelection gui) {
+	public GuiListPlanetSelectionEntry(Planet planet, GuiPlanetSelection gui) {
 		this.planet = planet;
 		this.gui = gui;
 	}

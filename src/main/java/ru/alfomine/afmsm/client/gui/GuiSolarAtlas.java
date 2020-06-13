@@ -2,7 +2,7 @@ package ru.alfomine.afmsm.client.gui;
 
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
-import ru.alfomine.afmsm.planet.PlanetData;
+import ru.alfomine.afmsm.planet.Planet;
 
 import java.util.List;
 
@@ -10,11 +10,11 @@ public class GuiSolarAtlas extends CustomGui {
 	
 	static int lWidth = 366;
 	static int lHeight = 275;
-	List<PlanetData> planets;
+	List<Planet> planets;
 	int spaceSize;
 	int prevScale = -1;
 	
-	public GuiSolarAtlas(List<PlanetData> planets, int spaceSize) {
+	public GuiSolarAtlas(List<Planet> planets, int spaceSize) {
 		this.planets = planets;
 		this.spaceSize = spaceSize;
 	}

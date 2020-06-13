@@ -10,7 +10,7 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.math.MathHelper;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
-import ru.alfomine.afmsm.planet.PlanetData;
+import ru.alfomine.afmsm.planet.Planet;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,7 @@ public class GuiListPlanetSelection extends GuiListExtended {
 	List<GuiListPlanetSelectionEntry> entries = new ArrayList<>();
 	int selectedIndex;
 	
-	public GuiListPlanetSelection(Minecraft mcIn, int x, int y, int widthIn, int heightIn, int slotHeightIn, List<PlanetData> planets, GuiPlanetSelection gui) {
+	public GuiListPlanetSelection(Minecraft mcIn, int x, int y, int widthIn, int heightIn, int slotHeightIn, List<Planet> planets, GuiPlanetSelection gui) {
 		super(mcIn, widthIn, heightIn, y, y + heightIn, slotHeightIn);
 		
 		this.x = x;
