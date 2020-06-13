@@ -5,7 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
-import ru.alfomine.afmsm.planet.PlanetData;
+import ru.alfomine.afmsm.planet.Planet;
 
 import java.io.IOException;
 import java.util.List;
@@ -16,11 +16,11 @@ public class GuiPlanetSelection extends CustomGui {
 	
 	static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_planetselection.png");
 	public GuiListPlanetSelection list;
-	List<PlanetData> planets;
+	List<Planet> planets;
 	private int lWidth = 262;
 	private int lHeight = 512;
 	
-	public GuiPlanetSelection(List<PlanetData> planets) {
+	public GuiPlanetSelection(List<Planet> planets) {
 		this.planets = planets;
 	}
 	

@@ -66,6 +66,7 @@ minecraft {
 
 dependencies {
     compile name: "warpdrive"
+    compile name: "afmuf"
 }
 
 compileJava.options.encoding = "UTF-8"

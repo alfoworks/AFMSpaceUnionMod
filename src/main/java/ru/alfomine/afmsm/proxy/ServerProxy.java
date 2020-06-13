@@ -9,7 +9,7 @@ public class ServerProxy implements IProxy {
 	
 	@Override
 	public void preInit(FMLPreInitializationEvent event) {
-		PlanetConfig.init();
+
 	}
 	
 	@Override

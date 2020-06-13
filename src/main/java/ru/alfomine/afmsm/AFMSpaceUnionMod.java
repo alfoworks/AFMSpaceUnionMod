@@ -3,6 +3,7 @@ package ru.alfomine.afmsm;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -11,6 +12,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import ru.alfomine.afmsm.client.gui.GuiPlanetSelection;
 import ru.alfomine.afmsm.client.keybinds.KeyBinder;
@@ -18,6 +21,7 @@ import ru.alfomine.afmsm.client.keybinds.KeyBinder.KeyBind;
 import ru.alfomine.afmsm.command.CommandPlanetSelectionGui;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.proxy.IProxy;
+import ru.alfomine.afmsm.server.PlanetConfig;
 
 
 @Mod(
@@ -36,6 +40,7 @@ public class AFMSpaceUnionMod {
 	public static AFMSpaceUnionMod INSTANCE;
 	@SidedProxy(clientSide = CLIENT, serverSide = SERVER)
 	public static IProxy proxy;
+	public static Logger logger = LogManager.getLogger(MOD_ID);
 	
 	@Mod.EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -55,6 +60,12 @@ public class AFMSpaceUnionMod {
 	
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
+		try {
+			PlanetConfig.init();
+		} catch (NoClassDefFoundError ignored) {
+
+		}
+
 		proxy.postInit(event);
 	}
 	

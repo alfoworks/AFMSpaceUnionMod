@@ -8,6 +8,7 @@ import net.minecraft.server.MinecraftServer;
 import net.minecraft.util.text.TextComponentString;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.network.message.MessagePlanetaryGui;
+import ru.alfomine.afmsm.planet.SpaceData;
 
 import java.util.ArrayList;
 
@@ -32,7 +33,7 @@ public class CommandPlanetSelectionGui extends CommandBase {
 			return;
 		}
 		
-		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(new ArrayList<>(), 1, 0), (EntityPlayerMP) sender);
+		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(SpaceData.getPlanets(), 1, 0), (EntityPlayerMP) sender);
 	}
 	
 	@Override

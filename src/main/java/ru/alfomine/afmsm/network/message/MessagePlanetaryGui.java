@@ -15,14 +15,15 @@ import net.minecraftforge.fml.common.network.simpleimpl.IMessageHandler;
 import net.minecraftforge.fml.common.network.simpleimpl.MessageContext;
 import ru.alfomine.afmsm.client.gui.GuiPlanetSelection;
 import ru.alfomine.afmsm.client.gui.GuiSolarAtlas;
-import ru.alfomine.afmsm.planet.PlanetData;
+import ru.alfomine.afmsm.planet.Planet;
 import ru.alfomine.afmsm.planet.PlanetDifficulty;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePlanetaryGui, IMessage> {
 	
-	private ArrayList<PlanetData> planets;
+	private List<Planet> planets;
 	private int gui;
 	private int spaceSize;
 	
@@ -30,7 +31,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 	
 	}
 	
-	public MessagePlanetaryGui(ArrayList<PlanetData> planets, int gui, int spaceSize) {
+	public MessagePlanetaryGui(List<Planet> planets, int gui, int spaceSize) {
 		this.planets = planets;
 		this.gui = gui;
 		this.spaceSize = spaceSize;
@@ -45,7 +46,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 		for (JsonElement element : jsonPlanets) {
 			JsonObject jsonPlanet = element.getAsJsonObject();
 			
-			planets.add(new PlanetData(
+			planets.add(new Planet(
 			new ResourceLocation(jsonPlanet.get("iconResource").getAsString()),
 			jsonPlanet.get("name").getAsString(),
 			PlanetDifficulty.values()[jsonPlanet.get("difficulty").getAsInt()],
@@ -60,7 +61,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 	public void toBytes(ByteBuf buf) {
 		JsonArray jsonPlanets = new JsonArray();
 		
-		for (PlanetData planet : planets) {
+		for (Planet planet : planets) {
 			JsonObject jsonPlanet = new JsonObject();
 			
 			jsonPlanet.addProperty("iconResource", planet.iconResource.toString());
@@ -90,9 +91,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 		}
 		
 		GuiScreen finalScreen = screen;
-		mc.addScheduledTask(() -> {
-			mc.displayGuiScreen(finalScreen);
-		});
+		mc.addScheduledTask(() -> mc.displayGuiScreen(finalScreen));
 		
 		return null;
 	}
