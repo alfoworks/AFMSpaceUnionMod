@@ -6,6 +6,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import ru.alfomine.afmsm.client.gui.api.CustomGui;
 
 import javax.vecmath.Vector2d;
 import java.io.IOException;

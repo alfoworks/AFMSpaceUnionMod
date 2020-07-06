@@ -5,29 +5,33 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
+import ru.alfomine.afmsm.client.gui.api.CustomButton;
+import ru.alfomine.afmsm.client.gui.api.CustomGui;
 import ru.alfomine.afmsm.planet.Planet;
 
 import java.io.IOException;
 import java.util.List;
 
 public class GuiPlanetSelection extends CustomGui {
-	
+
 	public static boolean active = false;
-	
+
 	static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_planetselection.png");
-	public GuiListPlanetSelection list;
+	public GuiSlotPlanetSelection list;
 	List<Planet> planets;
 	private int lWidth = 262;
 	private int lHeight = 512;
-	
+	public int selected = -1;
+
 	public GuiPlanetSelection(List<Planet> planets) {
 		this.planets = planets;
 	}
-	
+
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		this.drawDefaultBackground();
-		
+
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 		
 		int lX = res.getScaledWidth() - lWidth;
@@ -103,25 +107,29 @@ public class GuiPlanetSelection extends CustomGui {
 	@Override
 	public void initGui() {
 		super.initGui();
-		
+
 		active = true;
-		
+
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-		
+
 		GuiButton butt = new CustomButton(0, res.getScaledWidth() - lWidth + 7, 187, 50, 20, I18n.format("afmsm.text.gui_planetselection.button_select"));
 		butt.enabled = false;
-		
+
 		buttonList.add(butt);
-		
-		int lX = res.getScaledWidth() - lWidth;
-		
-		list = new GuiListPlanetSelection(mc, lX + 62, 37, 198, Math.min(470, res.getScaledHeight() - 37), 53, planets, this);
+
+		int lX = res.getScaledWidth() - lWidth + 70;
+
+		list = new GuiSlotPlanetSelection(planets, this, lX, 0, lWidth, res.getScaledHeight(), 53, width, height);
 	}
 	
 	@Override
 	public void handleMouseInput() throws IOException {
 		super.handleMouseInput();
-		this.list.handleMouseInput();
+
+		int mouseX = Mouse.getEventX() * this.width / this.mc.displayWidth;
+		int mouseY = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+
+		this.list.handleMouseInput(mouseX, mouseY);
 	}
 	
 	@Override
