@@ -3,6 +3,8 @@ package ru.alfomine.afmsm.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
+import ru.alfomine.afmsm.client.gui.api.CustomButton;
+import ru.alfomine.afmsm.client.gui.api.CustomGui;
 
 import java.util.List;
 

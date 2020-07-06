@@ -2,6 +2,7 @@ package ru.alfomine.afmsm.client.gui;
 
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
+import ru.alfomine.afmsm.client.gui.api.CustomGui;
 import ru.alfomine.afmsm.planet.Planet;
 
 import java.util.List;
