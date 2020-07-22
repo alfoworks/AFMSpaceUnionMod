@@ -1,9 +1,13 @@
 package ru.alfomine.afmsm;
 
+import cr0s.warpdrive.render.RenderSpaceSky;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
+import net.minecraft.client.gui.GuiOptions;
+import net.minecraftforge.client.event.GuiScreenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.CommandEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -16,6 +20,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Keyboard;
 import ru.alfomine.afmsm.client.gui.GuiPlanetSelection;
+import ru.alfomine.afmsm.client.gui.GuiSkyboxSelection;
 import ru.alfomine.afmsm.client.keybinds.KeyBinder;
 import ru.alfomine.afmsm.client.keybinds.KeyBinder.KeyBind;
 import ru.alfomine.afmsm.command.CommandPlanetSelectionGui;
@@ -89,11 +94,25 @@ public class AFMSpaceUnionMod {
 			event.setCanceled(true);
 		}
 	}
-	
+
 	@SubscribeEvent
 	public void onRenderOverlay(RenderGameOverlayEvent event) {
 		if (GuiPlanetSelection.active && (event.getType() == ElementType.HOTBAR || event.getType() == ElementType.CROSSHAIRS)) {
 			event.setCanceled(true);
 		}
+	}
+
+	@SubscribeEvent
+	public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
+		if (!(event.getGui() instanceof GuiOptions)) return;
+
+		event.getButtonList().add(new GuiButton(1337, 0, event.getGui().height - 20, 200, 20, "WarpDrive Skybox"));
+	}
+
+	@SubscribeEvent
+	public void onGuiScreenAction(GuiScreenEvent.ActionPerformedEvent.Post event) {
+		if (event.getButton().id != 1337) return;
+
+		Minecraft.getMinecraft().displayGuiScreen(new GuiSkyboxSelection(RenderSpaceSky.getInstance().renderers));
 	}
 }

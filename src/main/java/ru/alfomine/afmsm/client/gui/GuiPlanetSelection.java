@@ -19,10 +19,10 @@ public class GuiPlanetSelection extends CustomGui {
 
 	static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_planetselection.png");
 	public GuiSlotPlanetSelection list;
+	public int selected = -1;
 	List<Planet> planets;
 	private int lWidth = 262;
 	private int lHeight = 512;
-	public int selected = -1;
 
 	public GuiPlanetSelection(List<Planet> planets) {
 		this.planets = planets;
@@ -117,9 +117,10 @@ public class GuiPlanetSelection extends CustomGui {
 
 		buttonList.add(butt);
 
-		int lX = res.getScaledWidth() - lWidth + 70;
+		int listY = 37;
+		int listHeight = Math.min(lHeight, res.getScaledHeight() - listY);
 
-		list = new GuiSlotPlanetSelection(planets, this, lX, 0, lWidth, res.getScaledHeight(), 53, width, height);
+		list = new GuiSlotPlanetSelection(planets, this, res.getScaledWidth() - 200, listY, 200, listHeight, 63, width, height);
 	}
 	
 	@Override
@@ -135,12 +136,18 @@ public class GuiPlanetSelection extends CustomGui {
 	@Override
 	public void onGuiClosed() {
 		super.onGuiClosed();
-		
+
 		active = false;
 	}
-	
+
 	@Override
 	public boolean doesGuiPauseGame() {
 		return true;
+	}
+
+	public void setSelected(int slotIdx) {
+		selected = slotIdx;
+
+		buttonList.get(0).enabled = slotIdx != -1;
 	}
 }
