@@ -32,23 +32,23 @@ public class GuiPlanetSelectionConfirmation extends CustomGui {
 		
 		mc.renderEngine.bindTexture(GuiPlanetSelection.mainGuiLoc);
 		drawTexturedModalRect512(centerX, centerY, lWidth, lHeight, 262, 68, lWidth, lHeight);
-		
+
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-		
+
 		int labelX = center(fontRenderer.getStringWidth(title), res.getScaledWidth());
 		int labelY = center(lHeight, res.getScaledHeight()) + 10;
-		
+
 		long time = System.currentTimeMillis() - timeStarted;
 		int alpha = (int) Math.round(128 + 127 * Math.sin(((double) time % 2001) / (double) 2000 * 2 * Math.PI));
-		
-		drawString(fontRenderer, title, labelX, labelY, colorARGBtoInt(alpha, 255, 255, 255));
-		
+
+		drawString(fontRenderer, title, labelX, labelY, colorARGBtoInt(alpha, 255, 50, 50));
+
 		for (int i = 0; i < warnList.size(); i++) {
 			String toDraw = warnList.get(i);
-			
+
 			drawString(fontRenderer, toDraw, center(fontRenderer.getStringWidth(toDraw), res.getScaledWidth()), i * fontRenderer.FONT_HEIGHT + labelY + 15, 0xFFFFFF);
 		}
-		
+
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	

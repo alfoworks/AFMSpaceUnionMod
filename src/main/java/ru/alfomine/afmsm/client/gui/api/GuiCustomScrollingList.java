@@ -1,7 +1,6 @@
 package ru.alfomine.afmsm.client.gui.api;
 
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
@@ -12,7 +11,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import java.io.IOException;
-import java.util.List;
 
 public abstract class GuiCustomScrollingList {
     protected final int listWidth;
@@ -38,6 +36,8 @@ public abstract class GuiCustomScrollingList {
     private boolean highlightSelected = true;
     private boolean hasHeader;
     private int headerHeight;
+    public boolean animActive = false;
+    private long animTime = 0;
 
     // Легкий конструктор без хуйни. А то накодят какую-то парашу непонятную, а ты потом разбирайся.
     public GuiCustomScrollingList(int x, int y, int width, int height, int entryHeight, int screenWidth, int screenHeight) {
@@ -132,42 +132,9 @@ public abstract class GuiCustomScrollingList {
         return x >= left && x <= right && entryIndex >= 0 && relativeY >= 0 && entryIndex < this.getSize() ? entryIndex : -1;
     }
 
-    // FIXME: is this correct/still needed?
-    public void registerScrollButtons(List<GuiButton> buttons, int upActionID, int downActionID) {
-        this.scrollUpActionId = upActionID;
-        this.scrollDownActionId = downActionID;
+    public static float easeOut(float t, float b, float c, float d) {
+        return c * ((t = t / d - 1) * t * t + 1) + b;
     }
-
-    private void applyScrollLimits() {
-        int listHeight = this.getContentHeight() - (this.bottom - this.top - 4);
-
-        if (listHeight < 0) {
-            listHeight /= 2;
-        }
-
-        if (this.scrollDistance < 0.0F) {
-            this.scrollDistance = 0.0F;
-        }
-
-        if (this.scrollDistance > (float) listHeight) {
-            this.scrollDistance = (float) listHeight;
-        }
-    }
-
-    public void actionPerformed(GuiButton button) {
-        if (button.enabled) {
-            if (button.id == this.scrollUpActionId) {
-                this.scrollDistance -= (float) (this.slotHeight * 2 / 3);
-                this.initialMouseClickY = -2.0F;
-                this.applyScrollLimits();
-            } else if (button.id == this.scrollDownActionId) {
-                this.scrollDistance += (float) (this.slotHeight * 2 / 3);
-                this.initialMouseClickY = -2.0F;
-                this.applyScrollLimits();
-            }
-        }
-    }
-
 
     public void handleMouseInput(int mouseX, int mouseY) throws IOException {
         boolean isHovering = mouseX >= this.left && mouseX <= this.left + this.listWidth &&
@@ -178,6 +145,19 @@ public abstract class GuiCustomScrollingList {
         int scroll = Mouse.getEventDWheel();
         if (scroll != 0) {
             this.scrollDistance += (float) ((-1 * scroll / 120.0F) * this.slotHeight / 2);
+        }
+    }
+
+    private void applyScrollLimits() {
+        int listHeight = this.getContentHeight() - (this.bottom - this.top - 4);
+
+        if (listHeight < 0) {
+            //listHeight /= 2;
+            this.scrollDistance = 0;
+        } else if (this.scrollDistance < 0.0F) {
+            this.scrollDistance = 0.0F;
+        } else if (this.scrollDistance > (float) listHeight) {
+            this.scrollDistance = (float) listHeight;
         }
     }
 
@@ -192,25 +172,13 @@ public abstract class GuiCustomScrollingList {
         int scrollBarWidth = 6;
         int scrollBarRight = this.left + this.listWidth;
         int scrollBarLeft = scrollBarRight - scrollBarWidth;
-        int entryLeft = this.left;
         int entryRight = scrollBarLeft - 1;
         int viewHeight = this.bottom - this.top;
-        int border = 4;
+        int border = 0;
 
         if (Mouse.isButtonDown(0)) {
             if (this.initialMouseClickY == -1.0F) {
                 if (isHovering) {
-                    int mouseListY = mouseY - this.top - this.headerHeight + (int) this.scrollDistance - border;
-                    int slotIndex = mouseListY / this.slotHeight;
-
-                    if (mouseX >= entryLeft && mouseX <= entryRight && slotIndex >= 0 && mouseListY >= 0 && slotIndex < listLength) {
-                        this.elementClicked(slotIndex, slotIndex == this.selectedIndex && System.currentTimeMillis() - this.lastClickTime < 250L);
-                        this.selectedIndex = slotIndex;
-                        this.lastClickTime = System.currentTimeMillis();
-                    } else if (mouseX >= entryLeft && mouseX <= entryRight && mouseListY < 0) {
-                        this.clickHeader(mouseX - entryLeft, mouseY - this.top + (int) this.scrollDistance - border);
-                    }
-
                     if (mouseX >= scrollBarLeft && mouseX <= scrollBarRight) {
                         this.scrollFactor = -1.0F;
                         int scrollHeight = this.getContentHeight() - viewHeight - border;
@@ -257,29 +225,29 @@ public abstract class GuiCustomScrollingList {
             this.drawHeader(entryRight, baseY, tess);
         }
 
+        if (animTime == 0) {
+            animActive = true;
+            animTime = System.currentTimeMillis();
+        }
+
+        int actualSlotHeight;
+
+        if (animActive) {
+            actualSlotHeight = (int) easeOut((float) ((System.currentTimeMillis() - animTime) / 0.9), 0, slotHeight, 1000);
+
+            if (actualSlotHeight >= slotHeight) {
+                animTime = -1;
+                animActive = false;
+            }
+        } else {
+            actualSlotHeight = slotHeight;
+        }
+
         for (int slotIdx = 0; slotIdx < listLength; ++slotIdx) {
-            int slotTop = baseY + slotIdx * this.slotHeight + this.headerHeight;
-            int slotBuffer = this.slotHeight - border;
+            int slotTop = baseY + (slotIdx * actualSlotHeight) + this.headerHeight;
+            int slotBuffer = actualSlotHeight - border;
 
             if (slotTop <= this.bottom && slotTop + slotBuffer >= this.top) {
-                if (this.highlightSelected && this.isSelected(slotIdx)) {
-                    int min = this.left;
-                    int max = entryRight;
-                    GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-                    GlStateManager.disableTexture2D();
-                    worldr.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
-                    worldr.pos(min, slotTop + slotBuffer + 2, 0).tex(0, 1).color(0x80, 0x80, 0x80, 0xFF).endVertex();
-                    worldr.pos(max, slotTop + slotBuffer + 2, 0).tex(1, 1).color(0x80, 0x80, 0x80, 0xFF).endVertex();
-                    worldr.pos(max, slotTop - 2, 0).tex(1, 0).color(0x80, 0x80, 0x80, 0xFF).endVertex();
-                    worldr.pos(min, slotTop - 2, 0).tex(0, 0).color(0x80, 0x80, 0x80, 0xFF).endVertex();
-                    worldr.pos(min + 1, slotTop + slotBuffer + 1, 0).tex(0, 1).color(0x00, 0x00, 0x00, 0xFF).endVertex();
-                    worldr.pos(max - 1, slotTop + slotBuffer + 1, 0).tex(1, 1).color(0x00, 0x00, 0x00, 0xFF).endVertex();
-                    worldr.pos(max - 1, slotTop - 1, 0).tex(1, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
-                    worldr.pos(min + 1, slotTop - 1, 0).tex(0, 0).color(0x00, 0x00, 0x00, 0xFF).endVertex();
-                    tess.draw();
-                    GlStateManager.enableTexture2D();
-                }
-
                 this.drawSlot(slotIdx, entryRight, slotTop, slotBuffer, mouseX, mouseY, tess);
             }
         }

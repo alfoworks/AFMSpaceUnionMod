@@ -5,3 +5,4 @@ afmsm.text.gui_planetselection_confirm.button.yes=Стартуем!
 afmsm.text.gui_planetselection_confirm.warn=Вы точно уверены?%sИзменить ваш выбор на этом аккаунте больше не получится.
 afmsm.text.gui_planetselection_confirm.title=Подтвердите свой выбор
 item.solaratlas.name=SolarAtlas
+afmsm.text.gui_skyboxselection.title=Выберите скайбокс
