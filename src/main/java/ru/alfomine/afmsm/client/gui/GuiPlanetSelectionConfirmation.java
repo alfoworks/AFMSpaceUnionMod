@@ -3,6 +3,7 @@ package ru.alfomine.afmsm.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.ResourceLocation;
 import ru.alfomine.afmsm.client.gui.api.CustomButton;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
 
@@ -11,35 +12,37 @@ import java.util.List;
 public class GuiPlanetSelectionConfirmation extends CustomGui {
 	
 	private int lWidth = 212;
-	private int lHeight = 130;
-	
-	private int centerX;
-	private int centerY;
-	
-	private String title = I18n.format("afmsm.text.gui_planetselection_confirm.title");
-	
-	private long timeStarted;
-	
-	private List<String> warnList;
-	
-	public GuiPlanetSelectionConfirmation() {
-		this.timeStarted = System.currentTimeMillis();
-	}
-	
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		super.drawDefaultBackground();
-		
-		mc.renderEngine.bindTexture(GuiPlanetSelection.mainGuiLoc);
-		drawTexturedModalRect512(centerX, centerY, lWidth, lHeight, 262, 68, lWidth, lHeight);
+    private int lHeight = 130;
 
-		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
+    private int centerX;
+    private int centerY;
 
-		int labelX = center(fontRenderer.getStringWidth(title), res.getScaledWidth());
-		int labelY = center(lHeight, res.getScaledHeight()) + 10;
+    private String title = I18n.format("afmsm.text.gui_planetselection_confirm.title");
 
-		long time = System.currentTimeMillis() - timeStarted;
-		int alpha = (int) Math.round(128 + 127 * Math.sin(((double) time % 2001) / (double) 2000 * 2 * Math.PI));
+    private long timeStarted;
+
+    private List<String> warnList;
+
+    private ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
+
+    public GuiPlanetSelectionConfirmation() {
+        this.timeStarted = System.currentTimeMillis();
+    }
+
+    @Override
+    public void drawScreen(int mouseX, int mouseY, float partialTicks) {
+        super.drawDefaultBackground();
+
+        mc.renderEngine.bindTexture(mainGuiLoc);
+        drawTexturedModalRect512(centerX, centerY, lWidth, lHeight, 262, 68, lWidth, lHeight);
+
+        ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
+
+        int labelX = center(fontRenderer.getStringWidth(title), res.getScaledWidth());
+        int labelY = center(lHeight, res.getScaledHeight()) + 10;
+
+        long time = System.currentTimeMillis() - timeStarted;
+        int alpha = (int) Math.round(128 + 127 * Math.sin(((double) time % 2001) / (double) 2000 * 2 * Math.PI));
 
 		drawString(fontRenderer, title, labelX, labelY, colorARGBtoInt(alpha, 255, 50, 50));
 

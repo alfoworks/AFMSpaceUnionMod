@@ -29,10 +29,10 @@ public abstract class GuiCustomScrollingList {
     protected boolean captureMouse = true;
     private int scrollUpActionId;
     private int scrollDownActionId;
-    private float initialMouseClickY = -2.0F;
+    public float initialMouseClickY = -2.0F;
     private float scrollFactor;
     private float scrollDistance;
-    private long lastClickTime = 0L;
+    public long lastClickTime = 0L;
     private boolean highlightSelected = true;
     private boolean hasHeader;
     private int headerHeight;
@@ -179,6 +179,8 @@ public abstract class GuiCustomScrollingList {
         if (Mouse.isButtonDown(0)) {
             if (this.initialMouseClickY == -1.0F) {
                 if (isHovering) {
+                    this.lastClickTime = System.currentTimeMillis();
+
                     if (mouseX >= scrollBarLeft && mouseX <= scrollBarRight) {
                         this.scrollFactor = -1.0F;
                         int scrollHeight = this.getContentHeight() - viewHeight - border;
@@ -206,6 +208,8 @@ public abstract class GuiCustomScrollingList {
         } else {
             this.initialMouseClickY = -1.0F;
         }
+
+        //Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(String.valueOf(initialMouseClickY), 0, 0, 0xFFFFFF);
 
         this.applyScrollLimits();
 

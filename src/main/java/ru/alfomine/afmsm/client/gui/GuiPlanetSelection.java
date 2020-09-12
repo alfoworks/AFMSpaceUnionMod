@@ -15,18 +15,18 @@ import java.util.List;
 
 public class GuiPlanetSelection extends CustomGui {
 
-	public static boolean active = false;
+    public static boolean active = false;
 
-	static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_planetselection.png");
-	public GuiSlotPlanetSelection list;
-	public int selected = -1;
-	List<Planet> planets;
-	private int lWidth = 262;
-	private int lHeight = 512;
+    private ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
+    public GuiSlotPlanetSelection list;
+    public int selected = -1;
+    List<Planet> planets;
+    private int lWidth = 262;
+    private int lHeight = 512;
 
-	public GuiPlanetSelection(List<Planet> planets) {
-		this.planets = planets;
-	}
+    public GuiPlanetSelection(List<Planet> planets) {
+        this.planets = planets;
+    }
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {

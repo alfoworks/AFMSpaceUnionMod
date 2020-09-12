@@ -1,0 +1,22 @@
+[
+  {
+    "warpId": "earth",
+    "difficulty": 0
+  },
+  {
+    "warpId": "moon",
+    "difficulty": 1
+  },
+  {
+    "warpId": "mars",
+    "difficulty": 2
+  },
+  {
+    "warpId": "phobos",
+    "difficulty": 2
+  },
+  {
+    "warpId": "deimos",
+    "difficulty": 2
+  }
+]

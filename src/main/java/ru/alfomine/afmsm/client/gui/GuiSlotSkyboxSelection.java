@@ -16,6 +16,8 @@ public class GuiSlotSkyboxSelection extends GuiCustomScrollingList {
     List<ISkyBoxRenderer> list;
     GuiSkyboxSelection parent;
 
+    private ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
+
     public GuiSlotSkyboxSelection(List<ISkyBoxRenderer> list, GuiSkyboxSelection parent, int x, int y, int width, int height, int entryHeight, int screenWidth, int screenHeight) {
         super(x, y, width, height, entryHeight, screenWidth, screenHeight);
 
@@ -56,17 +58,23 @@ public class GuiSlotSkyboxSelection extends GuiCustomScrollingList {
                 mouseY <= slotTop + slotHeight - 10;
         boolean selected = slotIdx == parent.selected;
 
-        if (hovered && Mouse.isButtonDown(0)) {
+        if (hovered && Mouse.isButtonDown(0) && slotIdx != parent.selected && System.currentTimeMillis() - lastClickTime < 10) {
             parent.setSelected(slotIdx);
             selected = true;
         }
 
-        mc.renderEngine.bindTexture(GuiPlanetSelection.mainGuiLoc);
+        mc.renderEngine.bindTexture(mainGuiLoc);
 
         Color color = Color.BLUE;
 
+        if (selected) {
+            color = color.darker().darker();
+        } else if (hovered) {
+            color = color.darker();
+        }
+
         GL11.glColor3f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
-        parent.drawTexturedModalRect512(x, slotTop, 188, 53, 262, 0, 188, 53);
+        parent.drawTexturedModalRect512(x, slotTop, 188, 76, 262, 198, 188, 76);
 
         if (selected) {
             parent.drawTexturedModalRect512(x + 166, slotTop + 10, 16, 15, 262, 53, 16, 15);
@@ -74,11 +82,11 @@ public class GuiSlotSkyboxSelection extends GuiCustomScrollingList {
 
         GL11.glColor3f(1f, 1f, 1f);
 
-        int iconRes = 34;
+        int iconRes = 52;
 
-        mc.renderEngine.bindTexture(new ResourceLocation(""));
-        Gui.drawModalRectWithCustomSizedTexture(x + 10, slotTop + 10, 0, 0, iconRes, iconRes, iconRes, iconRes);
+        mc.renderEngine.bindTexture(skybox.getPreview());
+        Gui.drawModalRectWithCustomSizedTexture(x + 11, slotTop + 12, 0, 0, iconRes, iconRes, iconRes, iconRes);
 
-        parent.drawString(mc.fontRenderer, skybox.getName(), x + 12 + parent.center(mc.fontRenderer.getStringWidth(skybox.getName()), 188), slotTop + 8, 0xFFFFFF);
+        parent.drawString(mc.fontRenderer, skybox.getName(), x + 64 + parent.center(mc.fontRenderer.getStringWidth(skybox.getName()), 115), slotTop + 27 + mc.fontRenderer.FONT_HEIGHT / 2, 0xFFFFFF);
     }
 }
