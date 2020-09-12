@@ -3,6 +3,7 @@ package ru.alfomine.afmsm.client.gui;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import ru.alfomine.afmsm.client.gui.api.GuiCustomScrollingList;
@@ -14,6 +15,8 @@ import java.util.List;
 public class GuiSlotPlanetSelection extends GuiCustomScrollingList {
     List<Planet> list;
     GuiPlanetSelection parent;
+
+    private ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
 
     public GuiSlotPlanetSelection(List<Planet> list, GuiPlanetSelection parent, int x, int y, int width, int height, int entryHeight, int screenWidth, int screenHeight) {
         super(x, y, width, height, entryHeight, screenWidth, screenHeight);
@@ -60,7 +63,7 @@ public class GuiSlotPlanetSelection extends GuiCustomScrollingList {
             selected = true;
         }
 
-        mc.renderEngine.bindTexture(GuiPlanetSelection.mainGuiLoc);
+        mc.renderEngine.bindTexture(mainGuiLoc);
 
         Color color = planet.difficulty.color;
 
@@ -82,7 +85,7 @@ public class GuiSlotPlanetSelection extends GuiCustomScrollingList {
         int iconRes = 34;
 
         mc.renderEngine.bindTexture(planet.iconResource);
-        Gui.drawModalRectWithCustomSizedTexture(x + 10, slotTop + 10, 0, 0, iconRes, iconRes, iconRes, iconRes);
+        Gui.drawModalRectWithCustomSizedTexture(x + 12, slotTop + 10, 0, 0, iconRes, iconRes, iconRes, iconRes);
 
         parent.drawString(mc.fontRenderer, planet.name, x + 12 + parent.center(mc.fontRenderer.getStringWidth(planet.name), 188), slotTop + 8, 0xFFFFFF);
         parent.drawString(mc.fontRenderer, String.format("Сложность: %s", planet.difficulty.name), x + 52, slotTop + 20, 0xFFFFFF);

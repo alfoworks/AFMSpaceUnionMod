@@ -104,10 +104,10 @@ public class AFMSpaceUnionMod {
 
 	@SubscribeEvent
 	public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
-		if (!(event.getGui() instanceof GuiOptions)) return;
+        if (!(event.getGui() instanceof GuiOptions)) return;
 
-		event.getButtonList().add(new GuiButton(1337, 0, event.getGui().height - 20, 200, 20, "WarpDrive Skybox"));
-	}
+        event.getButtonList().add(new GuiButton(1337, 0, event.getGui().height - 20, 120, 20, "WarpDrive Skybox"));
+    }
 
 	@SubscribeEvent
 	public void onGuiScreenAction(GuiScreenEvent.ActionPerformedEvent.Post event) {

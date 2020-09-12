@@ -7,13 +7,15 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
 import ru.alfomine.afmsm.client.gui.api.CustomButton;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
 
+import java.io.IOException;
 import java.util.List;
 
 public class GuiSkyboxSelection extends CustomGui {
-    static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_planetselection.png");
+    static ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
     GuiSlotSkyboxSelection list;
     List<ISkyBoxRenderer> skyboxes;
     int selected = -1;
@@ -36,7 +38,18 @@ public class GuiSkyboxSelection extends CustomGui {
         int listY = 37;
         int listHeight = Math.min(lHeight, res.getScaledHeight() - listY);
 
-        list = new GuiSlotSkyboxSelection(skyboxes, this, res.getScaledWidth() - 200, listY, 200, listHeight, 63, width, height);
+        list = new GuiSlotSkyboxSelection(skyboxes, this, res.getScaledWidth() - 200, listY, 200, listHeight, 86, width, height);
+    }
+
+    @Override
+    public void handleMouseInput() throws IOException {
+        super.handleMouseInput();
+
+        int mouseX = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int mouseY = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+
+
+        list.handleMouseInput(mouseX, mouseY);
     }
 
     @Override
