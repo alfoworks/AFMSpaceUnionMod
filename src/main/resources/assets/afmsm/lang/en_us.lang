@@ -1,5 +1,6 @@
 afmsm.text.gui_planetselection.title=Choose Your Planet
 afmsm.text.gui_skyboxselection.title=Choose The Skybox
+afmsm.text.gui_skyboxselection.warntext=Selecting a skybox can cause minor game freeze. Be patient :)
 afmsm.text.gui_planetselection.button_select=Select
 afmsm.text.gui_planetselection_confirm.button.no=Not yet...
 afmsm.text.gui_planetselection_confirm.button.yes=Yes!
