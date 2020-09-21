@@ -1,6 +1,6 @@
 package ru.alfomine.afmsm;
 
-import cr0s.warpdrive.render.RenderSpaceSky;
+import cr0s.warpdrive.client.SkyBoxManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiOptions;
@@ -27,6 +27,8 @@ import ru.alfomine.afmsm.command.CommandPlanetSelectionGui;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.proxy.IProxy;
 import ru.alfomine.afmsm.server.PlanetConfig;
+
+import java.util.ArrayList;
 
 
 @Mod(
@@ -106,13 +108,13 @@ public class AFMSpaceUnionMod {
 	public void onScreenInit(GuiScreenEvent.InitGuiEvent.Post event) {
         if (!(event.getGui() instanceof GuiOptions)) return;
 
-        event.getButtonList().add(new GuiButton(1337, 0, event.getGui().height - 20, 120, 20, "WarpDrive Skybox"));
+		event.getButtonList().add(new GuiButton(1337, 0, event.getGui().height - 20, 100, 20, "WarpDrive Skybox"));
     }
 
 	@SubscribeEvent
 	public void onGuiScreenAction(GuiScreenEvent.ActionPerformedEvent.Post event) {
 		if (event.getButton().id != 1337) return;
 
-		Minecraft.getMinecraft().displayGuiScreen(new GuiSkyboxSelection(RenderSpaceSky.getInstance().renderers));
+		Minecraft.getMinecraft().displayGuiScreen(new GuiSkyboxSelection(new ArrayList<>(SkyBoxManager.skyboxes.values())));
 	}
 }

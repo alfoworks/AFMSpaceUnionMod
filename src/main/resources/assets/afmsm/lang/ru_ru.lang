@@ -6,3 +6,4 @@ afmsm.text.gui_planetselection_confirm.warn=Вы точно уверены?%sИ�
 afmsm.text.gui_planetselection_confirm.title=Подтвердите свой выбор
 item.solaratlas.name=SolarAtlas
 afmsm.text.gui_skyboxselection.title=Выберите скайбокс
+afmsm.text.gui_skyboxselection.warntext=Выбор скайбокса может привести к небольшому зависанию. Будьте терпеливы :)
