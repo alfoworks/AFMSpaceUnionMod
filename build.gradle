@@ -33,7 +33,7 @@ task prepareAssets(type: Copy) {
     into project.file('build/classes/java/main')
 }
 
-classes.dependsOn(prepareAssets)
+//classes.dependsOn(prepareAssets)
 
 repositories {
     mavenCentral()
@@ -43,21 +43,23 @@ repositories {
     }
 }
 
+/ * Блять, это ебейшие костыли, но я ебался с этим в очко полдня и не смог сделать иначе, так что мне похуй */
+
 jar {
     destinationDir = file './output'
-    baseName = "AFMSM-all"
+    archiveName = "AFMSM-all-" + modVersion + ".jar"
 }
 
 task clientJar(type: Jar) {
     destinationDir = file './output'
     baseName = "AFMSM-client"
 
-    from sourceSets.main.output
+    from zipTree(jar.archivePath)
 
     exclude "ru/alfomine/afmsm/server/*"
 }
 
-jar.finalizedBy(clientJar)
+build.finalizedBy(clientJar)
 
 version = modVersion
 group = modGroup
