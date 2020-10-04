@@ -10,6 +10,8 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.alfomine.afmsm.command.CommandPlanetSelectionGui;
+import ru.alfomine.afmsm.init.ModItems;
+import ru.alfomine.afmsm.init.ModWorlds;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.proxy.IProxy;
 import ru.alfomine.afmsm.server.PlanetConfig;
@@ -40,6 +42,7 @@ public class AFMSpaceUnionMod {
 		MinecraftForge.EVENT_BUS.register(proxy);
 
 		ModItems.init();
+		ModWorlds.init();
 		AFMSMPacketHandler.init();
 
 		proxy.preInit(event);

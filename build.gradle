@@ -33,7 +33,7 @@ task prepareAssets(type: Copy) {
     into project.file('build/classes/java/main')
 }
 
-//classes.dependsOn(prepareAssets)
+classes.dependsOn(prepareAssets)
 
 repositories {
     mavenCentral()
