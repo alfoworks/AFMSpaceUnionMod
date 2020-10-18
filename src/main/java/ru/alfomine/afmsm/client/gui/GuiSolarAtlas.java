@@ -33,22 +33,26 @@ public class GuiSolarAtlas extends CustomGui {
 		
 		mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
 		drawTexturedModalRect512(lX, lY, lWidth, lHeight, 0, 0, lWidth, lHeight);
-		
+
 		// Отрисовка заголовка
-		
+
 		drawString(fontRenderer, "SolarAtlas", lX + 4, lY + 8, 0xFFFFFF);
-		
+
 		// Отрисовка имён планет в списке (еще не закончено)
-		
+
 		for (int i = 0; i < planets.size(); i++) {
 			drawString(fontRenderer, planets.get(i).name, lX + 259, (i * fontRenderer.FONT_HEIGHT + 3) + lY + 24, 0xFFFFFF);
 		}
-		
-		/*
-		Пример отрисовки самих планет:
-		drawModalRectWithCustomSizedTexture(0, 0, 0, 0, width, height, width, height);
-		 */
-		
+
+		for (Planet planet : planets) {
+			mc.renderEngine.bindTexture(planet.iconResource);
+
+			/*
+			Пример отрисовки планеты
+			drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
+			 */
+		}
+
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 	
