@@ -22,6 +22,9 @@ import ru.alfomine.afmsm.init.ModWorlds;
 import java.util.List;
 
 public class SpawnWorldProvider extends WorldProvider implements IGalacticraftWorldProvider {
+
+    public static float[] lightmap;
+
     private final CelestialBody celestialBody = new CelestialBody("SpawnWorld") {
         @Override
         public int getID() {
@@ -47,7 +50,7 @@ public class SpawnWorldProvider extends WorldProvider implements IGalacticraftWo
     @Override
     protected void generateLightBrightnessTable() {
         for (int i = 0; i <= 15; ++i) {
-            lightBrightnessTable[i] = 0xFF000000;
+            lightBrightnessTable[i] = 1;
         }
     }
 
@@ -138,7 +141,7 @@ public class SpawnWorldProvider extends WorldProvider implements IGalacticraftWo
 
     @Override
     public float getGravity() {
-        return 0.072F;
+        return 0.09F;
     }
 
     @Override
