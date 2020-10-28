@@ -21,7 +21,7 @@
     <celestialObject id="Hyperspace">
         <size x="2000000" z="2000000"/>
         <name>Hyperspace\n超空间</name>
-        <description>Your ship warp bubble is your\nonly protection.\n你的飞船扭曲气泡\n是你唯一的保护.</description>
+        <description>Your ship warp bubble is your\nonly protection.</description>
 
         <dimension id="-100" isBreathable="false" isHyperspace="true" gravity="legacyHyperspace">
             <center x="0" z="0"/>
@@ -42,8 +42,8 @@
                 <center x="0" z="0"/>
             </parent>
             <size x="1900000" z="1900000"/>
-            <name>Solar system\n太阳系</name>
-            <description>The void, filled with §6resources§r.\n§r§l太阳终将燃尽\n§6寻找类地行星...</description>
+            <name>Solar system</name>
+            <description>The void, filled with §6resources§r.</description>
             <dimension id="-101" isBreathable="false" gravity="legacySpace">
                 <center x="0" z="0"/>
                 <provider type="WarpDriveSpace"/>
@@ -61,7 +61,7 @@
                 <fogFactor red="0.0" green="0.0" blue="0.0"/>
             </skybox>
 
-            <celestialObject id="Sun\n太阳">
+            <celestialObject id="sun">
                 <parent>
                     <center x="0" z="0"/>
                 </parent>
@@ -81,11 +81,12 @@
                 <render red="0.70" green="0.55" blue="0.20" alpha="0.08" texture=""/>
             </celestialObject>
 
-            <celestialObject id="Mercury\n水星" mods="extraplanets">
+            <celestialObject id="mercury" mods="extraplanets">
                 <parent>
                     <center x="15000" z="0"/>
                 </parent>
                 <size x="5000" z="5000"/>
+                <name>Mercury</name>
                 <dimension id="-13" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -94,11 +95,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Venus\n金星" mods="galacticraftplanets">
+            <celestialObject id="venus" mods="galacticraftplanets">
                 <parent>
                     <center x="0" z="33000"/>
                 </parent>
                 <size x="20000" z="20000"/>
+                <name>Venus</name>
                 <dimension id="-31" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -112,7 +114,7 @@
                     <center x="-45000" z="0"/>
                 </parent>
                 <size x="21000" z="21000"/>
-                <name>Земля</name>
+                <name>Earth</name>
                 <dimension id="0" isBreathable="true" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -137,7 +139,7 @@
                     <center x="-65000" z="0"/>
                 </parent>
                 <size x="6000" z="6000"/>
-                <name>Луна</name>
+                <name>Moon</name>
                 <dimension id="-28" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -151,7 +153,7 @@
                     <center x="0" z="-86000"/>
                 </parent>
                 <size x="11000" z="11000"/>
-                <name>Марс</name>
+                <name>Mars</name>
                 <dimension id="-29" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -165,7 +167,7 @@
                     <center x="-10000" z="-96000"/>
                 </parent>
                 <size x="5000" z="5000"/>
-                <name>Фобос</name>
+                <name>Phobos</name>
                 <dimension id="-1502" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -179,7 +181,7 @@
                     <center x="-18000" z="-104000"/>
                 </parent>
                 <size x="3200" z="3200"/>
-                <name>Деймос</name>
+                <name>Deimos</name>
                 <dimension id="-1503" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -188,11 +190,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Asteroid belt\n小行星带" mods="extraplanets">
+            <celestialObject id="ass" mods="extraplanets">
                 <parent>
                     <center x="146000" z="0"/>
                 </parent>
                 <size x="15000" z="15000"/>
+                <name>ASSteroid belt</name>
                 <dimension id="-30" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -201,11 +204,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Ceres\n谷神星" mods="extraplanets">
+            <celestialObject id="ceres" mods="extraplanets">
                 <parent>
                     <center x="146000" z="-10000"/>
                 </parent>
                 <size x="2600" z="2600"/>
+                <name>Ceres</name>
                 <dimension id="-20" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -214,11 +218,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Jupiter\n木星" mods="extraplanets">
+            <celestialObject id="jupiter" mods="extraplanets">
                 <parent>
                     <center x="290000" z="0"/>
                 </parent>
                 <size x="250000" z="250000"/>
+                <name>Jupiter</name>
                 <dimension id="-15" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -227,11 +232,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Io\n木卫一" mods="extraplanets">
+            <celestialObject id="io" mods="extraplanets">
                 <parent>
                     <center x="422000" z="-132000"/>
                 </parent>
                 <size x="6000" z="6000"/>
+                <name>IO</name>
                 <dimension id="-1500" isBreathable="false" gravity="0.43">
                     <center x="0" z="0"/>
                 </dimension>
@@ -240,11 +246,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Europa\n木卫二" mods="extraplanets">
+            <celestialObject id="europa" mods="extraplanets">
                 <parent>
                     <center x="430000" z="-140000"/>
                 </parent>
                 <size x="5000" z="5000"/>
+                <name>Europa</name>
                 <dimension id="-1501" isBreathable="false" gravity="0.4">
                     <center x="0" z="0"/>
                 </dimension>
@@ -253,11 +260,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Ganymede\n木卫三" mods="extraplanets">
+            <celestialObject id="ganymede" mods="extraplanets">
                 <parent>
                     <center x="443000" z="-153000"/>
                 </parent>
                 <size x="9000" z="9000"/>
+                <name>Ganymede</name>
                 <dimension id="-1506" isBreathable="false" gravity="0.4">
                     <center x="0" z="0"/>
                 </dimension>
@@ -266,11 +274,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Callisto\n木卫四" mods="extraplanets">
+            <celestialObject id="callisto" mods="extraplanets">
                 <parent>
                     <center x="458000" z="-168000"/>
                 </parent>
                 <size x="8300" z="8300"/>
+                <name>Callisto</name>
                 <dimension id="-1505" isBreathable="false" gravity="0.4">
                     <center x="0" z="0"/>
                 </dimension>
@@ -279,11 +288,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Saturn\n土星" mods="extraplanets">
+            <celestialObject id="saturn" mods="extraplanets">
                 <parent>
                     <center x="0" z="330000"/>
                 </parent>
                 <size x="208000" z="208000"/>
+                <name>Saturn</name>
                 <dimension id="-16" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -292,11 +302,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Rhea\n土卫五" mods="extraplanets">
+            <celestialObject id="rhea" mods="extraplanets">
                 <parent>
                     <center x="116000" z="446000"/>
                 </parent>
                 <size x="3600" z="3600"/>
+                <name>Rhea</name>
                 <dimension id="-1507" isBreathable="false" gravity="0.3">
                     <center x="0" z="0"/>
                 </dimension>
@@ -305,11 +316,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Titan\n土卫六" mods="extraplanets">
+            <celestialObject id="titan" mods="extraplanets">
                 <parent>
                     <center x="128000" z="458000"/>
                 </parent>
                 <size x="8600" z="8600"/>
+                <name>Titan</name>
                 <dimension id="-1508" isBreathable="false" gravity="0.4">
                     <center x="0" z="0"/>
                 </dimension>
@@ -318,11 +330,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Iapetus\n土卫八" mods="extraplanets">
+            <celestialObject id="iapetus" mods="extraplanets">
                 <parent>
                     <center x="142000" z="472000"/>
                 </parent>
                 <size x="2800" z="2800"/>
+                <name>Iapetus</name>
                 <dimension id="-1511" isBreathable="false" gravity="0.24">
                     <center x="0" z="0"/>
                 </dimension>
@@ -331,11 +344,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Uranus\n天王星" mods="extraplanets">
+            <celestialObject id="uranus" mods="extraplanets">
                 <parent>
                     <center x="-600000" z="0"/>
                 </parent>
                 <size x="89000" z="89000"/>
+                <name>UrAnus</name>
                 <dimension id="-17" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -344,11 +358,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Titania\n天卫三" mods="extraplanets">
+            <celestialObject id="titania" mods="extraplanets">
                 <parent>
                     <center x="-653000" z="53000"/>
                 </parent>
                 <size x="3200" z="3200"/>
+                <name>Titania</name>
                 <dimension id="-1510" isBreathable="false" gravity="0.6">
                     <center x="0" z="0"/>
                 </dimension>
@@ -357,11 +372,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Oberon\n天卫四" mods="extraplanets">
+            <celestialObject id="oberon" mods="extraplanets">
                 <parent>
                     <center x="-661000" z="61000"/>
                 </parent>
                 <size x="3200" z="3200"/>
+                <name>Oberon</name>
                 <dimension id="-1509" isBreathable="false" gravity="0.6">
                     <center x="0" z="0"/>
                 </dimension>
@@ -370,11 +386,12 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Neptune\n海王星" mods="extraplanets">
+            <celestialObject id="neptune" mods="extraplanets">
                 <parent>
                     <center x="0" z="-700000"/>
                 </parent>
                 <size x="86602" z="86602"/>
+                <name>Neptune</name>
                 <dimension id="-18" isBreathable="false" gravity="normal">
                     <center x="0" z="0"/>
                 </dimension>
@@ -383,31 +400,18 @@
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
             </celestialObject>
 
-            <celestialObject id="Triton\n海卫一" mods="extraplanets">
+            <celestialObject id="triton" mods="extraplanets">
                 <parent>
                     <center x="-58000" z="-758000"/>
                 </parent>
                 <size x="5000" z="5000"/>
+                <name>Triton</name>
                 <dimension id="-1504" isBreathable="false" gravity="0.3">
                     <center x="0" z="0"/>
                 </dimension>
                 <render red="1.00" green="1.00" blue="1.00" alpha="1.00"
                         texture="extraplanets:textures/blocks/triton_surface.png" periodU="150"/>
                 <render red="0.80" green="0.90" blue="0.90" alpha="0.30"/>
-            </celestialObject>
-
-            <!-- Pluto is The End. It's a far planet. -->
-            <celestialObject id="Pluto\n冥王星">
-                <parent>
-                    <center x="-900000" z="0"/>
-                </parent>
-                <size x="20000" z="20000"/>
-                <dimension id="1" isBreathable="true" gravity="normal">
-                    <center x="0" z="0"/>
-                </dimension>
-                <render red="1.00" green="1.00" blue="1.00" alpha="1.00"
-                        texture="minecraft:textures/blocks/end_stone.png" periodU="150"/>
-                <render red="0.50" green="0.50" blue="0.40" alpha="0.30"/>
             </celestialObject>
 
         </celestialObject>

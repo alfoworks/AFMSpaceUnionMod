@@ -29,7 +29,7 @@ public class ItemSolarAtlas extends Item {
 			return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 		}
 		
-		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(SpaceData.getPlanets(), 0, SpaceData.getSpaceSize()), (EntityPlayerMP) playerIn);
+		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(SpaceData.getSolarAtlasPlanes(), 0, SpaceData.getSpaceSize()), (EntityPlayerMP) playerIn);
 		
 		return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}
