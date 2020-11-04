@@ -3,15 +3,17 @@ package ru.alfomine.afmsm.planet;
 import net.minecraft.util.ResourceLocation;
 
 public class Planet {
-	
+
 	public ResourceLocation iconResource;
 	public String name;
+	public String warpId;
 	public PlanetDifficulty difficulty;
 	public int size;
 	
-	public Planet(ResourceLocation iconResource, String name, PlanetDifficulty difficulty, int size) {
+	public Planet(ResourceLocation iconResource, String name, String warpId, PlanetDifficulty difficulty, int size) {
 		this.iconResource = iconResource;
 		this.name = name;
+		this.warpId = warpId;
 		this.difficulty = difficulty;
 		this.size = size;
 		

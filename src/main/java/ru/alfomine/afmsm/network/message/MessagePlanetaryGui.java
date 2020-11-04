@@ -45,6 +45,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
             planets.add(new Planet(
                     new ResourceLocation(jsonPlanet.get("iconResource").getAsString()),
                     jsonPlanet.get("name").getAsString(),
+                    jsonPlanet.get("warpId").getAsString(),
                     PlanetDifficulty.values()[jsonPlanet.get("difficulty").getAsInt()],
                     jsonPlanet.get("size").getAsInt()));
         }
@@ -62,6 +63,7 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 
             jsonPlanet.addProperty("iconResource", planet.iconResource.toString());
             jsonPlanet.addProperty("name", planet.name);
+            jsonPlanet.addProperty("warpId", planet.warpId);
             jsonPlanet.addProperty("difficulty", planet.difficulty.ordinal());
             jsonPlanet.addProperty("size", planet.size);
 

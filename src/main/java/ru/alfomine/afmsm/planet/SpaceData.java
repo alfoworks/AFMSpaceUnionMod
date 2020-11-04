@@ -43,6 +43,7 @@ public class SpaceData {
 
             planets.add(new Planet(iconResource,
                     object.getDisplayName(),
+                    object.id,
                     PlanetDifficulty.EZ,
                     object.borderRadiusX));
         }

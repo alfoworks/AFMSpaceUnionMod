@@ -109,7 +109,7 @@ public class PlanetConfig {
             int size = cel.borderRadiusX;
             PlanetDifficulty difficulty = PlanetDifficulty.values()[difficultyInt];
 
-            planets.add(new Planet(iconResource, name, difficulty, size));
+            planets.add(new Planet(iconResource, name, warpId, difficulty, size));
         }
     }
 
