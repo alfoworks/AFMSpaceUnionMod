@@ -4,7 +4,10 @@ import cr0s.warpdrive.data.CelestialObject;
 import cr0s.warpdrive.data.CelestialObjectManager;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiPageButtonList;
+import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.AxisAlignedBB;
 import org.lwjgl.input.Mouse;
@@ -13,6 +16,7 @@ import ru.alfomine.afmsm.planet.Planet;
 
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
+import java.util.ArrayList;
 import java.util.List;
 
 public class GuiSolarAtlas extends CustomGui {
@@ -20,118 +24,84 @@ public class GuiSolarAtlas extends CustomGui {
 	static int lWidth = 366;
 	static int lHeight = 275;
 	List<Planet> planets;
+	List<GuiSolarAtlasPlanet> guiPlanets = new ArrayList<>();
 	int spaceSize;
 	int prevScale = -1;
-	
+
+	static float zoom;
+	static int offsetX;
+	static int offsetY;
+	private GuiSolarAtlasScroll scroll;
+
 	public GuiSolarAtlas(List<Planet> planets, int spaceSize) {
 		this.planets = planets;
 		this.spaceSize = spaceSize;
+
+		zoom = 1.0f;
+		offsetX = 0;
+		offsetY = 0;
 	}
 
-	float zoom = 1.0f;
-	int offsetX = 0;
-	int offsetY = 0;
 	String hoveringOver = null;
 	boolean grab = false;
 	boolean pressed = false;
+	static final int scale = 10000;
+	static int lX;
+	static int lY;
+
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
 		drawDefaultBackground();
-		
 		ScaledResolution res = new ScaledResolution(mc);
-		
-		int lX = center(lWidth, res.getScaledWidth());
-		int lY = center(lHeight, res.getScaledHeight());
+
+		lX = center(lWidth, res.getScaledWidth());
+		lY = center(lHeight, res.getScaledHeight());
 
 		// Отрисовка фона
-
 		mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas_bg.png"));
 		drawTexturedModalRect512(lX, lY+22, lWidth-114, lHeight-25, -offsetX/zoom/5f, -offsetY/zoom/5f, lWidth/zoom, lHeight/zoom);
 
 		// Отрисовка планет
+		for (GuiSolarAtlasPlanet planet : guiPlanets) {
+			mc.renderEngine.bindTexture(planet.planet.iconResource);
+			planet.calculate();
+			//Debug string
+			//drawString(fontRenderer, "" + planet.sizeX + " " + planet.sizeY + " " + planet.realSize, lX+40, lY + 40, 0xFFFFFF);
+			drawModalRectWithCustomSizedTexture(planet.x, planet.y, planet.overthrowXNegative, planet.overthrowYNegative, planet.sizeX, planet.sizeY, planet.realSize, planet.realSize);
+		}
 
-		for (Planet planet : planets) {
-			mc.renderEngine.bindTexture(planet.iconResource);
-			CelestialObject c = CelestialObjectManager.get(false, planet.warpId);
-			AxisAlignedBB area = c.getAreaInParent();
+		// Отрисовка контейнера
+		mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
+		drawTexturedModalRect512(lX, lY, lWidth, lHeight, 0, 0, lWidth, lHeight);
 
-			// Overthrow over borders of the display area
-			int overthrowX = 0;
-			int overthrowXNegative = 0;
-			int overthrowY = 0;
-			int overthrowYNegative = 0;
-
-			final int x = lX+259/2+((int) (area.minX/10000*zoom))+Math.round(offsetX);
-			final int y = lY+lHeight/2+((int) (area.minZ/10000*zoom))+Math.round(offsetY);
-			final int size = (int) Math.round(Math.abs((area.maxX - area.minX))/10000*zoom);
-
-
-			// Overthrow X calculation
-			if (x > lX+252-size) {
-				overthrowX = x-(lX+252-size);
-				// If we're overthrowing over size of the planet we're getting into negative numbers we don't want
-				if (overthrowXNegative > size)
-					overthrowXNegative = size;
+		// Отрисовка заголовка
+		assert mc.currentScreen != null;
+		// 109/1920 = 0.05677 - Distance on the fullscreen by width to the center of SolarAtlas display area
+		drawString(fontRenderer, String.format("SolarAtlas Zoom x%.1f", zoom), lX + 4, lY + 8, 0xFFFFFF);
+		int uniOffset = Math.round(14*scroll.sliderValue-14);
+		// Отрисовка имён планет в списке
+		for (float i = uniOffset; i < planets.size(); i++) {
+			if (i > Math.round(14*scroll.sliderValue)) {
+				continue;
 			}
+			drawString(fontRenderer, planets.get(Math.round(i)).name, lX + 259, Math.round((i * fontRenderer.FONT_HEIGHT + 3) + lY + 24 - uniOffset * fontRenderer.FONT_HEIGHT), 0xFFFFFF);
+		}
 
-			if (x < lX) {
-				overthrowXNegative = lX-x;
-				if (overthrowX > size)
-					overthrowXNegative = size;
-			}
+		// Mouse over planet actions
+		for (GuiSolarAtlasPlanet planet : guiPlanets) {
+			if (planet.isPointOverlapping(mouseX, mouseY)) {
+				hoveringOver = planet.celestial.id;
+				drawHoveringText((pressed) ? "Coordinates copied to clipboard!" : planet.planet.name.toUpperCase(), mouseX, mouseY);
 
-			// Overthrow Y calculation
-			if (y > lY+269-size) {
-				overthrowY = y-(lY+269-size);
-				if (overthrowY > size)
-					overthrowY = size;
-			}
-
-			if (y < lY + 22) {
-				overthrowYNegative = lY+22-y;
-				if (overthrowYNegative > size)
-					overthrowYNegative = size;
-			}
-
-			int realX = (overthrowXNegative != 0) ? x+overthrowXNegative : x;
-			int realY = (overthrowYNegative != 0) ? y+overthrowYNegative : y;
-
-			drawModalRectWithCustomSizedTexture(realX, realY, overthrowXNegative, overthrowYNegative, size-overthrowX-overthrowXNegative, size-overthrowY-overthrowYNegative, size, size);
-
-			// Debug coordinates on planets
-			// drawString(fontRenderer, String.format("%s %s", realX+overthrowXNegative, mouseX), realX, realY, 0xFFFFFF);
-			// drawString(fontRenderer, String.format("%s %s", realY-overthrowYNegative, mouseY), realX, realY+fontRenderer.FONT_HEIGHT+3, 0xFFFFFF);
-
-			// Mouse over planet check
-			if (	(mouseX > 303 && mouseX < 548) && (mouseY > 144 && mouseY < 387) &&
-					(mouseX > realX-overthrowXNegative && mouseX < realX-overthrowXNegative+size) &&
-					(mouseY > realY-overthrowYNegative && mouseY < realY-overthrowYNegative+size)) {
-				hoveringOver = planet.warpId;
-				drawHoveringText((pressed) ? "Coordinates copied to clipboard!" : planet.name.toUpperCase(), mouseX, mouseY);
-			} else if (planet.warpId.equalsIgnoreCase(hoveringOver)) {
+			} else if (planet.celestial.id.equalsIgnoreCase(hoveringOver)) {
 				hoveringOver = null;
 				pressed = false;
 			}
 		}
 
-		// Отрисовка контейнера
-
-		mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
-		drawTexturedModalRect512(lX, lY, lWidth, lHeight, 0, 0, lWidth, lHeight);
-
-		// Отрисовка заголовка
-
-		assert mc.currentScreen != null;
-		// 109/1920 = 0.05677 - Distance on the fullscreen by width to the center of SolarAtlas display area
-		drawString(fontRenderer, String.format("SolarAtlas Zoom x%.1f", zoom), lX + 4, lY + 8, 0xFFFFFF);
-
-		// Отрисовка имён планет в списке
-
-		for (int i = 0; i < planets.size(); i++) {
-			drawString(fontRenderer, planets.get(i).name, lX + 259, (i * fontRenderer.FONT_HEIGHT + 3) + lY + 24, 0xFFFFFF);
-		}
-
+		GlStateManager.disableLighting();
+		GlStateManager.enableBlend();
 		super.drawScreen(mouseX, mouseY, partialTicks);
 	}
 
@@ -171,17 +141,20 @@ public class GuiSolarAtlas extends CustomGui {
 			if (hoveringOver != null) {
 				pressed = true;
 				CelestialObject planet = CelestialObjectManager.get(false, hoveringOver);
-				StringSelection coordinates = new StringSelection(String.format("%s %s", (int) planet.getAreaInParent().minX, (int) planet.getAreaInParent().minZ));
-				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(coordinates, null);
+				setClipboardString(String.format("%s %s",
+						(int) (planet.getAreaInParent().minX+planet.getAreaInParent().maxX)/2,
+						(int) (planet.getAreaInParent().minZ+planet.getAreaInParent().maxZ)/2));
 			}
 
-			if (!grab) {
-				grab = true;
-				Mouse.getDX();
-				Mouse.getDY();
+			if (!((GuiSolarAtlasScroll) (buttonList.stream().filter(b -> b.id == "AFMAtlasSlider".hashCode()).findFirst().get())).dragging) {
+				if (!grab) {
+					grab = true;
+					Mouse.getDX();
+					Mouse.getDY();
+				}
+				offsetX += Mouse.getDX()*1.5;
+				offsetY -= Mouse.getDY()*1.5;
 			}
-			offsetX += Mouse.getDX()*1.5;
-			offsetY -= Mouse.getDY()*1.5;
 		} else {
 			grab = false;
 		}
@@ -198,9 +171,21 @@ public class GuiSolarAtlas extends CustomGui {
 	@Override
 	public void initGui() {
 		super.initGui();
-		
+
+		this.scroll = new GuiSolarAtlasScroll("AFMAtlasSlider".hashCode(), lX + 338, lY+24, 20, 130, 1.0f, 1+14f/planets.size(), 1.0f, "a");
+		addButton(scroll);
+
 		ScaledResolution res = new ScaledResolution(mc);
-		
+
+		// Initialization of planets
+		for (Planet p : planets) {
+			//Debug case
+			//if (p.name.equalsIgnoreCase("jupiter"))
+			GuiSolarAtlasPlanet planet = new GuiSolarAtlasPlanet(p);
+			planet.calculate();
+			guiPlanets.add(planet);
+		}
+
 		/*
 		Грязный хак, уменьшает размер интерфейса если контейнер не помещается в окне.
 		 */
@@ -218,6 +203,8 @@ public class GuiSolarAtlas extends CustomGui {
 		res = new ScaledResolution(mc);
 		height = res.getScaledHeight();
 		width = res.getScaledWidth();
+		scroll.x = center(lWidth, res.getScaledWidth()) + 338;
+		scroll.y = center(lHeight, res.getScaledHeight()) + 24;
 	}
 	
 	@Override
