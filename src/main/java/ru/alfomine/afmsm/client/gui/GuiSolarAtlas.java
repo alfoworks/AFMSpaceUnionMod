@@ -75,6 +75,15 @@ public class GuiSolarAtlas extends CustomGui {
 
         // Отрисовка сетки
 
+        // Отрисовка планет
+        for (GuiSolarAtlasPlanet planet : guiPlanets) {
+            mc.renderEngine.bindTexture(planet.planet.iconResource);
+            planet.calculate();
+            //Debug string
+            //drawString(fontRenderer, "" + planet.sizeX + " " + planet.sizeY + " " + planet.realSize, lX+40, lY + 40, 0xFFFFFF);
+            drawModalRectWithCustomSizedTexture(planet.x, planet.y, planet.overthrowXNegative, planet.overthrowYNegative, planet.sizeX, planet.sizeY, planet.realSize, planet.realSize);
+        }
+
         // Zoom block render
         float gridSize = 10*zoom;
         gridSize /= (gridSize > 80) ? 5 : (gridSize <= 10) ? 0.2 : 1;
@@ -110,15 +119,6 @@ public class GuiSolarAtlas extends CustomGui {
         GlStateManager.color(1.0F, 1.0f, 1.0f, 1.0f);
         drawString(fontRenderer, String.format("1:%s %s:%s:%s %s:%s:%s", scale / zoom * gridSize, offsetX, Math.round(transitionX),
                 Math.round(getRelativeX()), offsetY, Math.round(transitionY), Math.round(getRelativeY())), lX + 12, lY + lHeight - 35, 0xFFFFFF);
-
-        // Отрисовка планет
-        for (GuiSolarAtlasPlanet planet : guiPlanets) {
-            mc.renderEngine.bindTexture(planet.planet.iconResource);
-            planet.calculate();
-            //Debug string
-            //drawString(fontRenderer, "" + planet.sizeX + " " + planet.sizeY + " " + planet.realSize, lX+40, lY + 40, 0xFFFFFF);
-            drawModalRectWithCustomSizedTexture(planet.x, planet.y, planet.overthrowXNegative, planet.overthrowYNegative, planet.sizeX, planet.sizeY, planet.realSize, planet.realSize);
-        }
 
         // Отрисовка контейнера
         mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
