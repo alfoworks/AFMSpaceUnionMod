@@ -25,7 +25,8 @@ public class GuiSolarAtlasPlanet {
         this.celestial = CelestialObjectManager.get(false, planet.warpId);
         this.planet = planet;
         this.area = celestial.getAreaInParent();
-        this.realSize = (int) Math.round(Math.abs((area.maxX - area.minX)) / GuiSolarAtlas.scale * GuiSolarAtlas.zoom);
+        //this.realSize = (int) Math.round(Math.abs((area.maxX - area.minX)) / GuiSolarAtlas.scale * GuiSolarAtlas.zoom);
+        this.realSize = planet.size;
         this.sizeX = this.realSize;
         this.sizeY = this.realSize;
     }

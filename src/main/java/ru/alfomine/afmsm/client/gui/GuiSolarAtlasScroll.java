@@ -4,7 +4,10 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiPageButtonList;
+import net.minecraft.client.renderer.BufferBuilder;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -34,17 +37,16 @@ public class GuiSolarAtlasScroll extends GuiButton {
     public void drawButton(Minecraft mc, int mouseX, int mouseY, float partialTicks) {
         if (this.visible) {
             FontRenderer fontRenderer = mc.fontRenderer;
-            mc.getTextureManager().bindTexture(new ResourceLocation("afmsm", "textures/gui_verticalslider.png"));
+            mc.getTextureManager().bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
             this.hovered = mouseX >= this.x && mouseY >= this.y && mouseX < this.x + this.width && mouseY < this.y + this.height;
-            int hov = this.getHoverState(this.hovered);
             GlStateManager.enableBlend();
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             GlStateManager.blendFunc(770, 771);
-            drawScaledCustomSizeModalRect(this.x, this.y, 0, 0,
+            drawTexturedModalRect512(this.x, this.y,
                     this.width, this.height,
-                    this.width, this.height,
-                    this.width, this.height);
+                    366, 0,
+                    20, 200);
             GlStateManager.color(0.0F, 0.0F, 0.0F, 1.0F);
             this.drawTexturedModalRect(this.x, this.y + (this.sliderPosition) * this.height,
                     this.x + this.width, this.y + this.height,
@@ -114,5 +116,24 @@ public class GuiSolarAtlasScroll extends GuiButton {
 
     public void mouseReleased(int x, int y) {
         this.dragging = false;
+    }
+
+    private void drawTexturedModalRect512(float x, float y, float width, float height, float u, float v, float uWidth, float vHeight) {
+        GL11.glShadeModel(GL11.GL_FLAT);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        float texModX = 1F / 512;
+        float texModY = 1F / 512;
+        Tessellator tessellator = Tessellator.getInstance();
+        BufferBuilder worldRenderer = tessellator.getBuffer();
+        worldRenderer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX);
+        float height1 = 0;
+        float width0 = 0;
+        worldRenderer.pos(x, y + height, this.zLevel).tex((u + width0) * texModX, (v + vHeight) * texModY).endVertex();
+        worldRenderer.pos(x + width, y + height, this.zLevel).tex((u + uWidth) * texModX, (v + vHeight) * texModY).endVertex();
+        worldRenderer.pos(x + width, y, this.zLevel).tex((u + uWidth) * texModX, (v + height1) * texModY).endVertex();
+        worldRenderer.pos(x, y, this.zLevel).tex((u + width0) * texModX, (v + height1) * texModY).endVertex();
+        tessellator.draw();
     }
 }
