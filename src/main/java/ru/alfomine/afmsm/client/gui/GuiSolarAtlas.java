@@ -38,10 +38,10 @@ public class GuiSolarAtlas extends CustomGui {
     private float transitionZoom;
     private float transitionX;
     private float transitionY;
-    private boolean zoomingIn;
     static int offsetX;
     static int offsetY;
     private GuiSolarAtlasScroll scroll;
+    private float divider;
 
     public GuiSolarAtlas(List<Planet> planets, int spaceSize) {
         this.planets = planets;
@@ -74,30 +74,18 @@ public class GuiSolarAtlas extends CustomGui {
         drawTexturedModalRect512(lX, lY + 22, lWidth - 114, lHeight - 26, -offsetX / zoom / 5f, -offsetY / zoom / 5f, lWidth / zoom, lHeight / zoom);
 
         // Отрисовка сетки
-
-        // Отрисовка планет
-        for (GuiSolarAtlasPlanet planet : guiPlanets) {
-            mc.renderEngine.bindTexture(planet.planet.iconResource);
-            planet.calculate();
-            //Debug string
-            //drawString(fontRenderer, "" + planet.sizeX + " " + planet.sizeY + " " + planet.realSize, lX+40, lY + 40, 0xFFFFFF);
-            drawModalRectWithCustomSizedTexture(planet.x, planet.y, planet.overthrowXNegative, planet.overthrowYNegative, planet.sizeX, planet.sizeY, planet.realSize, planet.realSize);
-        }
-
-        // Zoom block render
-        float gridSize = 10*zoom;
+        float gridSize = 10 * zoom;
         gridSize /= (gridSize > 80) ? 5 : (gridSize <= 10) ? 0.2 : 1;
 
-        // Grid block
         {
             int i = 0;
             for (int x = Math.round(lX + 255 / 2f + offsetX % gridSize); x < lX + 255 + offsetX % gridSize + 60; x += gridSize) {
                 // Vertical right
                 if (x > lX && x < lX + 255)
-                    drawVerticalLine(x, lY + 20,lY + lHeight - 5, 0xAF00BFFF);
+                    drawVerticalLine(x, lY + 20, lY + lHeight - 5, 0xAF00BFFF);
                 // Vertical left
                 if (i != 0 && x - gridSize * i * 2 < lX + 255 && x - gridSize * i * 2 > lX)
-                    drawVerticalLine(Math.round(x - gridSize * i * 2f), lY + 20,lY + lHeight - 5, 0xAF00BFFF);
+                    drawVerticalLine(Math.round(x - gridSize * i * 2f), lY + 20, lY + lHeight - 5, 0xAF00BFFF);
                 i++;
             }
 
@@ -113,12 +101,23 @@ public class GuiSolarAtlas extends CustomGui {
             }
         }
 
-        drawVerticalLine(lX + 12, lY + lHeight - 20, lY + lHeight - 23, 0xBB035efc);
-        drawHorizontalLine(lX + 12, lX + 12 + Math.round(gridSize),lY + lHeight - 20, 0xBB035efc);
-        drawVerticalLine(lX + 12 + Math.round(gridSize), lY + lHeight - 20, lY + lHeight - 23, 0xBB035efc);
-        GlStateManager.color(1.0F, 1.0f, 1.0f, 1.0f);
-        drawString(fontRenderer, String.format("1:%s %s:%s:%s %s:%s:%s", scale / zoom * gridSize, offsetX, Math.round(transitionX),
-                Math.round(getRelativeX()), offsetY, Math.round(transitionY), Math.round(getRelativeY())), lX + 12, lY + lHeight - 35, 0xFFFFFF);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
+
+        // Отрисовка планет
+        for (GuiSolarAtlasPlanet planet : guiPlanets) {
+            mc.renderEngine.bindTexture(planet.planet.iconResource);
+            planet.calculate();
+            //Debug string
+            //drawString(fontRenderer, "" + planet.sizeX + " " + planet.sizeY + " " + planet.realSize, lX+40, lY + 40, 0xFFFFFF);
+            drawModalRectWithCustomSizedTexture(planet.x, planet.y, planet.overthrowXNegative, planet.overthrowYNegative, planet.sizeX, planet.sizeY, planet.realSize, planet.realSize);
+        }
+
+        // Zoom block render
+        drawVerticalLine(lX + 12, lY + lHeight - 22, lY + lHeight - 25, 0xBBFFFFFF);
+        drawHorizontalLine(lX + 12, lX + 12 + Math.round(gridSize), lY + lHeight - 22, 0xBBFFFFFF);
+        drawVerticalLine(lX + 12 + Math.round(gridSize), lY + lHeight - 22, lY + lHeight - 25, 0xBBFFFFFF);
+        drawString(fontRenderer, String.format("1:%s", Math.round(scale / zoom * gridSize)), lX + 12, lY + lHeight - 35, 0xFFFFFF);
+        GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
 
         // Отрисовка контейнера
         mc.renderEngine.bindTexture(new ResourceLocation("afmsm", "textures/gui_solaratlas.png"));
@@ -127,7 +126,7 @@ public class GuiSolarAtlas extends CustomGui {
         // Отрисовка заголовка
         assert mc.currentScreen != null;
         // 109/1920 = 0.05677 - Distance on the fullscreen by width to the center of SolarAtlas display area
-        drawString(fontRenderer, "SolarAtlas", lX + 4, lY + 8, 0xFFFFFF);
+        drawString(fontRenderer, "SolarAtlas " + (transitionZoom/zoom), lX + 4, lY + 8, 0xFFFFFF);
         int uniOffset = Math.round(14 * scroll.sliderValue - 14);
         // Отрисовка имён планет в списке
         for (float i = uniOffset; i < planets.size(); i++) {
@@ -159,14 +158,13 @@ public class GuiSolarAtlas extends CustomGui {
         // Zoom modification
         int temp = Mouse.getDWheel();
         if (temp != 0 && Mouse.isInsideWindow()) {
-            ScaledResolution res = new ScaledResolution(mc);
-
             transitionZoom = temp < 0 ?
                     (transitionZoom > 0.25) ? transitionZoom / 2f : transitionZoom
                     :
                     (transitionZoom < 64) ? transitionZoom * 2 : transitionZoom;
-            transitionX = (float) ((temp > 0) ? offsetX*2+getRelativeX() : transitionX/4f);
-            transitionY = (float) ((temp > 0) ? offsetY*2-getRelativeY() : transitionY/4f);
+            transitionX = (temp > 0) ? (float) (offsetX * 2 + getRelativeX()) : offsetX / 2f;
+            transitionY = (temp > 0) ? (float) (offsetY * 2 - getRelativeY()) : offsetY / 2f;
+            divider = 2;
         }
 
         // Zoom transition
@@ -234,33 +232,28 @@ public class GuiSolarAtlas extends CustomGui {
                     return AttenuationType.NONE;
                 }
             });*/
-            zoom += zoom / 30f; // Transition in 1 second
+            zoom += zoom / 10f; // Transition in x ticks
+            offsetX = (int) (transitionX / divider);
+            offsetY = (int) (transitionY / divider);
+            if (divider > 1)
+                divider-= 0.14285714285f;
 
-            // Zoom offset
-            if (Math.abs(offsetX) < Math.abs(transitionX))
-                offsetX = (int) (offsetX+transitionX/30f);
-            if (Math.abs(offsetY) < Math.abs(transitionY))
-                offsetY = (int) (offsetY+transitionY/30f);
             BigDecimal d = new BigDecimal(String.valueOf(zoom));
-            if ((d.intValue() + Math.round(d.floatValue()*10 - d.intValue() + 0.5f))/10f >= transitionZoom) {
+            if ((d.intValue() + Math.round(d.floatValue() * 10 - d.intValue() + 0.5f)) / 10f >= transitionZoom) {
                 zoom = transitionZoom;
             }
-
-            zoomingIn = true;
-        } else {
+        } else if (zoom > transitionZoom){
             // Zoom offset
             BigDecimal d = new BigDecimal(String.valueOf(zoom));
-            if ((d.intValue() + Math.round(d.floatValue()*100 - d.intValue()))/100f == transitionZoom) {
+            if ((d.intValue() + Math.round(d.floatValue() * 100 - d.intValue())) / 100f == transitionZoom) {
                 zoom = transitionZoom;
             } else {
-                zoom -= zoom / 30f; // Transition
-                if (Math.abs(offsetX) > Math.abs(transitionX))
-                    offsetX -= (int) ((offsetX-transitionX)/4f);
-                if (Math.abs(offsetY) > Math.abs(transitionY))
-                    offsetY -= (int) ((offsetY-transitionY)/4f);
+                zoom -= zoom / 10f; // Transition
+                offsetX = (int) (transitionX / divider);
+                offsetY = (int) (transitionY / divider);
+                if (divider > 1)
+                    divider--;
             }
-
-            zoomingIn = false;
         }
 
         // Grab check
