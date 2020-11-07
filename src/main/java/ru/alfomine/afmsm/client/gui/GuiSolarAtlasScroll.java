@@ -64,8 +64,6 @@ public class GuiSolarAtlasScroll extends GuiButton {
             } else if (this.hovered) {
                 l = 16777120; // Lighter Gray
             }
-
-            this.drawCenteredString(fontRenderer, this.displayString, this.x + this.width / 2, this.y + this.height/2, 0xFFFFFF);
         }
     }
 
