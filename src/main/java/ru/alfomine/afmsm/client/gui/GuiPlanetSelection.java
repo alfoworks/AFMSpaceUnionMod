@@ -1,14 +1,24 @@
 package ru.alfomine.afmsm.client.gui;
 
+import cr0s.warpdrive.render.RenderSpaceSky;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.BufferBuilder;
+import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.Matrix4f;
+import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.util.vector.Vector3f;
 import ru.alfomine.afmsm.client.gui.api.CustomButton;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
 import ru.alfomine.afmsm.space.Planet;
+import ru.alfomine.afmsm.space.Space;
 
 import java.io.IOException;
 import java.util.List;
@@ -20,17 +30,81 @@ public class GuiPlanetSelection extends CustomGui {
     private ResourceLocation mainGuiLoc = new ResourceLocation("afmsm", "textures/gui_selection.png");
     public GuiSlotPlanetSelection list;
     public int selected = -1;
-    List<Planet> planets;
+    Space space;
     private int lWidth = 262;
     private int lHeight = 512;
 
-    public GuiPlanetSelection(List<Planet> planets) {
-        this.planets = planets;
+    private int test = 0;
+
+    public GuiPlanetSelection(Space space) {
+        this.space = space;
     }
 
 	@Override
 	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		this.drawDefaultBackground();
+		drawRect(0, 0, width, height, 0xFF000000);
+		GL11.glColor3f(1, 1, 1);
+
+		// =======3d stuff====== //
+
+		if (selected != -1) {
+			GL11.glPushMatrix();
+
+			test ++;
+
+			if (test >= 359) {
+				test = 0;
+			}
+
+			mc.renderEngine.bindTexture(space.planets.get(selected).iconResource);
+
+			int sX = 50;
+			int sY = 50;
+			double sZ = 0.5;
+			int sU = 0;
+			int sV = 0;
+			int sWidth = 200;
+			int sHeight = 200;
+			int rr = 100;
+
+			float f = 1.0F / sWidth;
+			float f1 = 1.0F / sHeight;
+
+			Matrix4f camMatrix = new Matrix4f();
+			Matrix4f.translate(new Vector3f(0.0F, 0.0F, -9000.0F), camMatrix, camMatrix);
+			Matrix4f viewMatrix = new Matrix4f();
+			viewMatrix.m00 = 2.0F / width;
+			viewMatrix.m11 = 2.0F / -height;
+			viewMatrix.m22 = -2.0F / 9000.0F;
+			viewMatrix.m30 = -1.0F;
+			viewMatrix.m31 = 1.0F;
+			viewMatrix.m32 = -2.0F;
+
+			GL11.glMatrixMode(GL11.GL_PROJECTION);
+			GL11.glLoadIdentity();
+			GlStateManager.disableFog();
+			GlStateManager.disableAlpha();
+			GlStateManager.enableTexture2D();
+			GlStateManager.enableBlend();
+			GlStateManager.tryBlendFuncSeparate(GlStateManager.SourceFactor.SRC_ALPHA, GlStateManager.DestFactor.ONE_MINUS_SRC_ALPHA, GlStateManager.SourceFactor.ONE, GlStateManager.DestFactor.ZERO);
+
+			Tessellator tessellator = Tessellator.getInstance();
+			BufferBuilder bufferbuilder = tessellator.getBuffer();
+
+			bufferbuilder.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_COLOR);
+			bufferbuilder.pos(rr, -rr, rr).tex(0.0D, 0.0D).endVertex();
+			bufferbuilder.pos(rr, -rr, -rr).tex(0.0D, 1).endVertex();
+			bufferbuilder.pos(-rr, -rr, -rr).tex(1, 1).endVertex();
+			bufferbuilder.pos(-rr, -rr, rr).tex(1, 0.0D).endVertex();
+			tessellator.draw();
+
+			GlStateManager.enableTexture2D();
+			GlStateManager.enableAlpha();
+
+			GL11.glPopMatrix();
+		}
+
+		// =========GUI========= //
 
 		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
 		
@@ -57,53 +131,6 @@ public class GuiPlanetSelection extends CustomGui {
 		}
 	}
 	
-	/*
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		ScaledResolution res = new ScaledResolution(Minecraft.getMinecraft());
-		
-		int lX = res.getScaledWidth() - lWidth;
-		
-		mc.renderEngine.bindTexture(mainGuiLoc);
-		drawTexturedModalRect512(lX, 0, lWidth, lHeight, 0, 0, lWidth, lHeight);
-		
-		int titleX = lX + 15;
-		drawString(fontRenderer, I18n.format("afmsm.text.gui_planetselection.title"), titleX, 5, 0xFFFFFF);
-		
-		for (GuiListElement element : elements) {
-			mc.renderEngine.bindTexture(mainGuiLoc);
-			
-			Color color = element.planet.difficulty.color;
-			
-			if (selected != null && selected == element) { // selected
-				color = element.planet.difficulty.colorPressed;
-			} else if (element.isHovered(mouseX, mouseY)) { // hover
-				color = element.planet.difficulty.colorHovered;
-			}
-			
-			GL11.glColor3f(color.getRed() / 255f, color.getGreen() / 255f, color.getBlue() / 255f);
-			drawTexturedModalRect512(element.x, element.y, 188, 53, 262, 0, 188, 53);
-			
-			if (selected != null && selected == element) {
-				drawTexturedModalRect512(element.x + 166, element.y + 10, 16, 15, 262, 53, 16, 15);
-			}
-			
-			GlStateManager.color(1f, 1f, 1f);
-			
-			int iconRes = 34;
-			
-			mc.renderEngine.bindTexture(element.planet.iconResource);
-			drawModalRectWithCustomSizedTexture(element.x + 10, element.y + 10, 0, 0, iconRes, iconRes, iconRes, iconRes);
-			
-			drawString(fontRenderer, element.planet.name, element.x + 12 + center(fontRenderer.getStringWidth(element.planet.name), 188), element.y + 8, 0xFFFFFF);
-			drawString(fontRenderer, String.format("Сложность: %s", element.planet.difficulty.name), element.x + 52, element.y + 20, 0xFFFFFF);
-			drawString(fontRenderer, String.format("Размер: %sx%s", element.planet.sizeX, element.planet.sizeZ), element.x + 52, element.y + 20 + fontRenderer.FONT_HEIGHT, 0xFFFFFF);
-		}
-		
-		super.drawScreen(mouseX, mouseY, partialTicks);
-	}
-	 */
-	
 	@Override
 	public void initGui() {
 		super.initGui();
@@ -120,7 +147,7 @@ public class GuiPlanetSelection extends CustomGui {
 		int listY = 37;
 		int listHeight = Math.min(lHeight, res.getScaledHeight() - listY);
 
-		list = new GuiSlotPlanetSelection(planets, this, res.getScaledWidth() - 200, listY, 200, listHeight, 63, width, height);
+		list = new GuiSlotPlanetSelection(space.planets, this, res.getScaledWidth() - 200, listY, 200, listHeight, 63, width, height);
 	}
 	
 	@Override

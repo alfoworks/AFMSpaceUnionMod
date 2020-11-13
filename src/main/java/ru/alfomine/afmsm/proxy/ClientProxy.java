@@ -46,9 +46,9 @@ public class ClientProxy implements IProxy {
 		GuiScreen screen = null;
 
 		if (gui == 0) {
-			screen = new GuiSolarAtlas(space.planets, space.spaceSize);
+			screen = new GuiSolarAtlas(space);
 		} else if (gui == 1) {
-			screen = new GuiPlanetSelection(space.planets);
+			screen = new GuiPlanetSelection(space);
 		} else {
 			mc.player.sendMessage(new TextComponentString(String.format("Wrong planetary screen: %s", gui)));
 		}
@@ -68,16 +68,12 @@ public class ClientProxy implements IProxy {
 
 	@SubscribeEvent
 	public void onRenderOverlay(RenderGameOverlayEvent.Chat event) {
-		if (GuiPlanetSelection.active) {
-			event.setCanceled(true);
-		}
+
 	}
 
 	@SubscribeEvent
 	public void onRenderOverlay(RenderGameOverlayEvent event) {
-		if (GuiPlanetSelection.active && (event.getType() == RenderGameOverlayEvent.ElementType.HOTBAR || event.getType() == RenderGameOverlayEvent.ElementType.CROSSHAIRS)) {
-			event.setCanceled(true);
-		}
+
 	}
 
 	@SubscribeEvent

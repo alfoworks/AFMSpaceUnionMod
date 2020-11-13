@@ -5,9 +5,12 @@ import cr0s.warpdrive.data.CelestialObjectManager;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.SoundCategory;
 import org.lwjgl.input.Mouse;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
+import ru.alfomine.afmsm.init.ModSounds;
 import ru.alfomine.afmsm.space.Planet;
+import ru.alfomine.afmsm.space.Space;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -17,10 +20,10 @@ public class GuiSolarAtlas extends CustomGui {
 
     static int lWidth = 366;
     static int lHeight = 275;
-    List<Planet> planets;
     List<GuiSolarAtlasPlanet> guiPlanets = new ArrayList<>();
-    int spaceSize;
     int prevScale = -1;
+
+    private Space space;
 
     static float zoom;
     private float transitionZoom;
@@ -31,9 +34,8 @@ public class GuiSolarAtlas extends CustomGui {
     private GuiSolarAtlasScroll scroll;
     private float divider;
 
-    public GuiSolarAtlas(List<Planet> planets, int spaceSize) {
-        this.planets = planets;
-        this.spaceSize = spaceSize;
+    public GuiSolarAtlas(Space space) {
+        this.space = space;
 
         zoom = 1.0f;
         transitionZoom = 1.0f;
@@ -117,11 +119,11 @@ public class GuiSolarAtlas extends CustomGui {
         drawString(fontRenderer, "SolarAtlas " + (transitionZoom/zoom), lX + 4, lY + 8, 0xFFFFFF);
         int uniOffset = Math.round(14 * scroll.sliderValue - 14);
         // Отрисовка имён планет в списке
-        for (float i = uniOffset; i < planets.size(); i++) {
+        for (float i = uniOffset; i < space.planets.size(); i++) {
             if (i > Math.round(14 * scroll.sliderValue)) {
                 continue;
             }
-            drawString(fontRenderer, planets.get(Math.round(i)).name, lX + 259, Math.round((i * fontRenderer.FONT_HEIGHT + 3) + lY + 24 - uniOffset * fontRenderer.FONT_HEIGHT), 0xFFFFFF);
+            drawString(fontRenderer, space.planets.get(Math.round(i)).name, lX + 259, Math.round((i * fontRenderer.FONT_HEIGHT + 3) + lY + 24 - uniOffset * fontRenderer.FONT_HEIGHT), 0xFFFFFF);
         }
 
         // Mouse over planet actions
@@ -158,68 +160,8 @@ public class GuiSolarAtlas extends CustomGui {
         // Zoom transition
 
         if (zoom < transitionZoom) {
-            /*mc.getSoundHandler().playSound(new ISound() {
-                @Override
-                public ResourceLocation getSoundLocation() {
-                    return new ResourceLocation("afmsm", "sounds/gui_solaratlas_zoom.ogg");
-                }
+            mc.player.playSound(ModSounds.SOLARATLAS_ZOOM, mc.gameSettings.getSoundLevel(SoundCategory.MASTER), 1.0F);
 
-                @Nullable
-                @Override
-                public SoundEventAccessor createAccessor(SoundHandler handler) {
-                    return handler.getAccessor(getSoundLocation());
-                }
-
-                @Override
-                public Sound getSound() {
-                    return new Sound("afmsm:gui_solaratlas_zoom", getVolume(), getPitch(), 1, Sound.Type.FILE, true);
-                }
-
-                @Override
-                public SoundCategory getCategory() {
-                    return SoundCategory.MASTER;
-                }
-
-                @Override
-                public boolean canRepeat() {
-                    return false;
-                }
-
-                @Override
-                public int getRepeatDelay() {
-                    return 5;
-                }
-
-                @Override
-                public float getVolume() {
-                    return 1.0f;
-                }
-
-                @Override
-                public float getPitch() {
-                    return 1.0f;
-                }
-
-                @Override
-                public float getXPosF() {
-                    return 0;
-                }
-
-                @Override
-                public float getYPosF() {
-                    return 0;
-                }
-
-                @Override
-                public float getZPosF() {
-                    return 0;
-                }
-
-                @Override
-                public AttenuationType getAttenuationType() {
-                    return AttenuationType.NONE;
-                }
-            });*/
             zoom += zoom / 10f; // Transition in x ticks
             offsetX = (int) (transitionX / divider);
             offsetY = (int) (transitionY / divider);
@@ -282,13 +224,13 @@ public class GuiSolarAtlas extends CustomGui {
 
         /*mc.getSoundHandler().addListener((soundIn, accessor) -> accessor.addSound(soundIn.getSound()));
         mc.getSoundHandler().getAccessor(new ResourceLocation("afmsm", "sounds/gui_solaratlas_zoom.ogg"));*/
-        this.scroll = new GuiSolarAtlasScroll("AFMAtlasSlider".hashCode(), lX + 338, lY + 24, 20, 130, 1.0f, 1 + 14f / planets.size(), 1.0f, "a");
+        this.scroll = new GuiSolarAtlasScroll("AFMAtlasSlider".hashCode(), lX + 338, lY + 24, 20, 130, 1.0f, 1 + 14f / space.planets.size(), 1.0f, "a");
         addButton(scroll);
 
         ScaledResolution res = new ScaledResolution(mc);
 
         // Initialization of planets
-        for (Planet p : planets) {
+        for (Planet p : space.planets) {
             //Debug case
             //if (p.name.equalsIgnoreCase("jupiter"))
             GuiSolarAtlasPlanet planet = new GuiSolarAtlasPlanet(p);

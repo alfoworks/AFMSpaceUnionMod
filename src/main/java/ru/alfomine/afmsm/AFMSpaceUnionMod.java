@@ -11,6 +11,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import ru.alfomine.afmsm.command.CommandPlanetSelectionGui;
 import ru.alfomine.afmsm.init.ModItems;
+import ru.alfomine.afmsm.init.ModSounds;
 import ru.alfomine.afmsm.init.ModWorlds;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.proxy.IProxy;
@@ -51,6 +52,8 @@ public class AFMSpaceUnionMod {
 	@Mod.EventHandler
 	public void init(FMLInitializationEvent event) {
 		proxy.init(event);
+
+		ModSounds.registerSounds();
 	}
 	
 	@Mod.EventHandler

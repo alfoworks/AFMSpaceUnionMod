@@ -47,6 +47,8 @@ public class MessagePlanetaryGui implements IMessage, IMessageHandler<MessagePla
 
         compound.setTag("space", space.writeToNBT(new NBTTagCompound()));
         compound.setInteger("gui", gui);
+
+        ByteBufUtils.writeTag(buf, compound);
     }
 
     @Override

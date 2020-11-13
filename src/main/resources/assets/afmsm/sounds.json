@@ -1,0 +1,11 @@
+{
+  "gui_solaratlas_zoom": {
+    "category": "master",
+    "sounds": [
+      {
+        "name": "afmsm:gui_solaratlas_zoom",
+        "stream": false
+      }
+    ]
+  }
+}
