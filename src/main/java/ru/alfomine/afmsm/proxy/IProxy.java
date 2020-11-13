@@ -4,6 +4,7 @@ import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import ru.alfomine.afmsm.network.message.MessagePlanetaryGui;
+import ru.alfomine.afmsm.space.Space;
 
 public interface IProxy {
 
@@ -13,5 +14,5 @@ public interface IProxy {
 
 	public void postInit(FMLPostInitializationEvent event);
 
-	public void planetaryGuiMessage(MessagePlanetaryGui message);
+	public void planetaryGuiMessage(Space space, int gui);
 }

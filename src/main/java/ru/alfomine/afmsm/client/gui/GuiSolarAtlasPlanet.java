@@ -3,7 +3,7 @@ package ru.alfomine.afmsm.client.gui;
 import cr0s.warpdrive.data.CelestialObject;
 import cr0s.warpdrive.data.CelestialObjectManager;
 import net.minecraft.util.math.AxisAlignedBB;
-import ru.alfomine.afmsm.planet.Planet;
+import ru.alfomine.afmsm.space.Planet;
 
 public class GuiSolarAtlasPlanet {
     public final CelestialObject celestial;

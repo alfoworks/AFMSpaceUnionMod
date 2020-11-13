@@ -11,7 +11,7 @@ import net.minecraft.util.EnumHand;
 import net.minecraft.world.World;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.network.message.MessagePlanetaryGui;
-import ru.alfomine.afmsm.planet.SpaceData;
+import ru.alfomine.afmsm.space.SpaceManager;
 
 public class ItemSolarAtlas extends Item {
 	
@@ -29,7 +29,7 @@ public class ItemSolarAtlas extends Item {
 			return new ActionResult<>(EnumActionResult.FAIL, playerIn.getHeldItem(handIn));
 		}
 		
-		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(SpaceData.getSolarAtlasPlanes(), 0, SpaceData.getSpaceSize()), (EntityPlayerMP) playerIn);
+		AFMSMPacketHandler.INSTANCE.sendTo(new MessagePlanetaryGui(SpaceManager.getSpace(true), 0), (EntityPlayerMP) playerIn);
 		
 		return new ActionResult<>(EnumActionResult.SUCCESS, playerIn.getHeldItem(handIn));
 	}

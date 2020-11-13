@@ -1,4 +1,4 @@
-package ru.alfomine.afmsm.planet;
+package ru.alfomine.afmsm.space;
 
 import java.awt.*;
 

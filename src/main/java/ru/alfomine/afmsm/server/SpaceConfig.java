@@ -1,7 +1,6 @@
 package ru.alfomine.afmsm.server;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import cr0s.warpdrive.data.CelestialObject;
@@ -12,16 +11,14 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import org.apache.commons.io.IOUtils;
 import ru.alfomine.afmsm.AFMSpaceUnionMod;
-import ru.alfomine.afmsm.planet.Planet;
-import ru.alfomine.afmsm.planet.PlanetDifficulty;
+import ru.alfomine.afmsm.space.Planet;
+import ru.alfomine.afmsm.space.PlanetDifficulty;
 
 import java.io.*;
-import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 
-public class PlanetConfig {
+public class SpaceConfig {
+    public static Planet mainPlanet;
     public static ArrayList<Planet> planets = new ArrayList<>();
 
     public static void init() {
@@ -86,31 +83,44 @@ public class PlanetConfig {
     private static void readConfig() throws IOException {
         BufferedReader bufferedReader = new BufferedReader(new FileReader(getConfigFolder().getPath() + "/planets.json"));
 
-        JsonArray json = new Gson().fromJson(bufferedReader, JsonArray.class);
+        JsonObject json = new Gson().fromJson(bufferedReader, JsonObject.class);
 
         planets.clear();
+        mainPlanet = readSinglePlanet(json.getAsJsonObject("mainPlanet"));
 
-        for (JsonElement element : json.getAsJsonArray()) {
+        for (JsonElement element : json.getAsJsonArray("additionalPlanets")) {
             JsonObject jsonPlanet = element.getAsJsonObject();
+            Planet planet = readSinglePlanet(jsonPlanet);
 
-            String warpId = jsonPlanet.get("warpId").getAsString();
-            int difficultyInt = jsonPlanet.get("difficulty").getAsInt();
-
-            CelestialObject cel = CelestialObjectManager.get(false, warpId);
-
-            if (cel == null) {
-                AFMSpaceUnionMod.logger.error(String.format("%s is in planet config but not in warpdrive.", warpId));
-
+            if (planet == null) {
                 continue;
             }
 
-            String name = cel.getDisplayName();
-            ResourceLocation iconResource = cel.setRenderData.iterator().next().resourceLocation;
-            int size = cel.borderRadiusX;
-            PlanetDifficulty difficulty = PlanetDifficulty.values()[difficultyInt];
-
-            planets.add(new Planet(iconResource, name, warpId, difficulty, size));
+            planets.add(planet);
         }
+    }
+
+    public static Planet getPlanetFromCelestial(CelestialObject cel, PlanetDifficulty difficulty) {
+        String name = cel.getDisplayName();
+        ResourceLocation iconResource = cel.setRenderData.iterator().next().resourceLocation;
+        int size = cel.borderRadiusX;
+
+        return new Planet(iconResource, name, cel.id, difficulty, size);
+    }
+
+    private static Planet readSinglePlanet(JsonObject object) {
+        String warpId = object.get("warpId").getAsString();
+        int difficultyInt = object.get("difficulty").getAsInt();
+
+        CelestialObject cel = CelestialObjectManager.get(false, warpId);
+
+        if (cel == null) {
+            AFMSpaceUnionMod.logger.error(String.format("%s is in planet config but not in warpdrive.", warpId));
+
+            return null;
+        }
+
+        return getPlanetFromCelestial(cel, PlanetDifficulty.values()[difficultyInt]);
     }
 
     private static File getConfigFolder() {

@@ -14,7 +14,7 @@ import ru.alfomine.afmsm.init.ModItems;
 import ru.alfomine.afmsm.init.ModWorlds;
 import ru.alfomine.afmsm.network.AFMSMPacketHandler;
 import ru.alfomine.afmsm.proxy.IProxy;
-import ru.alfomine.afmsm.server.PlanetConfig;
+import ru.alfomine.afmsm.server.SpaceConfig;
 
 
 @Mod(
@@ -56,7 +56,7 @@ public class AFMSpaceUnionMod {
 	@Mod.EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		try {
-			PlanetConfig.init();
+			SpaceConfig.init();
 		} catch (NoClassDefFoundError ignored) {
 
 		}

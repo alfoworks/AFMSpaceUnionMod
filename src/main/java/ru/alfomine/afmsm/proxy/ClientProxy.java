@@ -19,6 +19,7 @@ import ru.alfomine.afmsm.client.gui.GuiSkyboxSelection;
 import ru.alfomine.afmsm.client.gui.GuiSolarAtlas;
 import ru.alfomine.afmsm.client.keybinds.KeyBinder;
 import ru.alfomine.afmsm.network.message.MessagePlanetaryGui;
+import ru.alfomine.afmsm.space.Space;
 
 import java.util.ArrayList;
 
@@ -40,16 +41,16 @@ public class ClientProxy implements IProxy {
 	}
 
 	@Override
-	public void planetaryGuiMessage(MessagePlanetaryGui message) {
+	public void planetaryGuiMessage(Space space, int gui) {
 		Minecraft mc = Minecraft.getMinecraft();
 		GuiScreen screen = null;
 
-		if (message.gui == 0) {
-			screen = new GuiSolarAtlas(message.planets, message.spaceSize);
-		} else if (message.gui == 1) {
-			screen = new GuiPlanetSelection(message.planets);
+		if (gui == 0) {
+			screen = new GuiSolarAtlas(space.planets, space.spaceSize);
+		} else if (gui == 1) {
+			screen = new GuiPlanetSelection(space.planets);
 		} else {
-			mc.player.sendMessage(new TextComponentString(String.format("Wrong planetary screen: %s", message.gui)));
+			mc.player.sendMessage(new TextComponentString(String.format("Wrong planetary screen: %s", gui)));
 		}
 
 		GuiScreen finalScreen = screen;

@@ -7,7 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import ru.alfomine.afmsm.client.gui.api.GuiCustomScrollingList;
-import ru.alfomine.afmsm.planet.Planet;
+import ru.alfomine.afmsm.space.Planet;
 
 import java.awt.*;
 import java.util.List;

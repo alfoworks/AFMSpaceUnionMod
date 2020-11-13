@@ -1,22 +1,24 @@
-[
-  {
+{
+  "mainPlanet": {
     "warpId": "earth",
     "difficulty": 0
   },
-  {
-    "warpId": "moon",
-    "difficulty": 1
-  },
-  {
-    "warpId": "mars",
-    "difficulty": 2
-  },
-  {
-    "warpId": "callisto",
-    "difficulty": 2
-  },
-  {
-    "warpId": "proximaB",
-    "difficulty": 3
-  }
-]
+  "additionalPlanets": [
+    {
+      "warpId": "moon",
+      "difficulty": 1
+    },
+    {
+      "warpId": "mars",
+      "difficulty": 2
+    },
+    {
+      "warpId": "callisto",
+      "difficulty": 2
+    },
+    {
+      "warpId": "proximaB",
+      "difficulty": 3
+    }
+  ]
+}

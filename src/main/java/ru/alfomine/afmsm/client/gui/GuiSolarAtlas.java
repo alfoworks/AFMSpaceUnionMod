@@ -2,26 +2,14 @@ package ru.alfomine.afmsm.client.gui;
 
 import cr0s.warpdrive.data.CelestialObject;
 import cr0s.warpdrive.data.CelestialObjectManager;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.*;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.GuiPageButtonList;
-import net.minecraft.client.gui.GuiSlider;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.math.AxisAlignedBB;
 import org.lwjgl.input.Mouse;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
-import ru.alfomine.afmsm.planet.Planet;
-import ru.alfomine.afmsm.planet.PlanetDifficulty;
+import ru.alfomine.afmsm.space.Planet;
 
-import javax.annotation.Nullable;
-import java.awt.*;
-import java.awt.datatransfer.StringSelection;
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 

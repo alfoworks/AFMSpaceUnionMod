@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import ru.alfomine.afmsm.client.gui.api.CustomButton;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
-import ru.alfomine.afmsm.planet.Planet;
+import ru.alfomine.afmsm.space.Planet;
 
 import java.io.IOException;
 import java.util.List;
