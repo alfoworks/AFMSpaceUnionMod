@@ -103,22 +103,9 @@ public class SpaceConfig {
     public static Planet getPlanetFromCelestial(CelestialObject cel, PlanetDifficulty difficulty) {
         String name = cel.getDisplayName();
 
-        ResourceLocation iconResource = null;
-
-        for (CelestialObject.RenderData renderData : cel.setRenderData) {
-            if (renderData.resourceLocation != null) {
-                iconResource = renderData.resourceLocation;
-                break;
-            }
-        }
-
-        if (iconResource == null) {
-            iconResource = new ResourceLocation("anus");
-        }
-
         int size = cel.borderRadiusX;
 
-        return new Planet(iconResource, name, cel.id, difficulty, size);
+        return new Planet(cel.setRenderData, name, cel.id, difficulty, size);
     }
 
     private static Planet readSinglePlanet(JsonObject object) {

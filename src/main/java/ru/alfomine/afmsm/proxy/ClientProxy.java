@@ -15,6 +15,7 @@ import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.InputEvent;
 import org.lwjgl.input.Keyboard;
 import ru.alfomine.afmsm.client.gui.GuiPlanetSelection;
+import ru.alfomine.afmsm.client.gui.GuiPlanetTeleportation;
 import ru.alfomine.afmsm.client.gui.GuiSkyboxSelection;
 import ru.alfomine.afmsm.client.gui.GuiSolarAtlas;
 import ru.alfomine.afmsm.client.keybinds.KeyBinder;
