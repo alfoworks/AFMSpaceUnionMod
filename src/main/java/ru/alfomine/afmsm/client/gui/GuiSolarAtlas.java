@@ -7,6 +7,7 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.SoundCategory;
 import org.lwjgl.input.Mouse;
+import ru.alfomine.afmsm.AFMSpaceUnionMod;
 import ru.alfomine.afmsm.client.gui.api.CustomGui;
 import ru.alfomine.afmsm.init.ModSounds;
 import ru.alfomine.afmsm.space.Planet;
@@ -23,22 +24,25 @@ public class GuiSolarAtlas extends CustomGui {
     List<GuiSolarAtlasPlanet> guiPlanets = new ArrayList<>();
     int prevScale = -1;
 
-    private Space space;
+    private final Space space;
 
     static float zoom;
+    private float initialZoom;
     private float transitionZoom;
+    private float initialX;
+    private float initialY;
     private float transitionX;
     private float transitionY;
     static int offsetX;
     static int offsetY;
     private GuiSolarAtlasScroll scroll;
-    private float divider;
 
     public GuiSolarAtlas(Space space) {
         this.space = space;
 
         zoom = 1.0f;
         transitionZoom = 1.0f;
+        initialZoom = -1.0f;
         offsetX = 0;
         offsetY = 0;
     }
@@ -116,7 +120,7 @@ public class GuiSolarAtlas extends CustomGui {
         // Отрисовка заголовка
         assert mc.currentScreen != null;
         // 109/1920 = 0.05677 - Distance on the fullscreen by width to the center of SolarAtlas display area
-        drawString(fontRenderer, "SolarAtlas " + (transitionZoom/zoom), lX + 4, lY + 8, 0xFFFFFF);
+        drawString(fontRenderer, "SolarAtlas", lX + 4, lY + 8, 0xFFFFFF);
         int uniOffset = Math.round(14 * scroll.sliderValue - 14);
         // Отрисовка имён планет в списке
         for (float i = uniOffset; i < space.planets.size(); i++) {
@@ -147,42 +151,30 @@ public class GuiSolarAtlas extends CustomGui {
     public void updateScreen() {
         // Zoom modification
         int temp = Mouse.getDWheel();
-        if (temp != 0 && Mouse.isInsideWindow()) {
+        if (temp != 0 && Mouse.isInsideWindow() && initialZoom == -1.0f) {
+            initialZoom = zoom;
             transitionZoom = temp < 0 ?
                     (transitionZoom > 0.25) ? transitionZoom / 2f : transitionZoom
                     :
                     (transitionZoom < 64) ? transitionZoom * 2 : transitionZoom;
-            transitionX = (temp > 0) ? (float) (offsetX * 2 + getRelativeX()) : offsetX / 2f;
-            transitionY = (temp > 0) ? (float) (offsetY * 2 - getRelativeY()) : offsetY / 2f;
-            divider = 2;
+            initialX = offsetX;
+            initialY = offsetY;
+            // Finding desired point on the next zoom level
+            transitionX = (temp > 0) ? (float) ((float) offsetX * 2 + getRelativeX()) : offsetX / 2f;
+            transitionY = (temp > 0) ? (float) ((float) offsetY * 2 - getRelativeY()) : offsetY / 2f;
+            if (initialZoom != transitionZoom)
+                mc.player.playSound(ModSounds.SOLARATLAS_ZOOM, mc.gameSettings.getSoundLevel(SoundCategory.MASTER), 1.0F);
         }
 
         // Zoom transition
-
-        if (zoom < transitionZoom) {
-            mc.player.playSound(ModSounds.SOLARATLAS_ZOOM, mc.gameSettings.getSoundLevel(SoundCategory.MASTER), 1.0F);
-
-            zoom += zoom / 10f; // Transition in x ticks
-            offsetX = (int) (transitionX / divider);
-            offsetY = (int) (transitionY / divider);
-            if (divider > 1)
-                divider-= 0.14285714285f;
-
-            BigDecimal d = new BigDecimal(String.valueOf(zoom));
-            if ((d.intValue() + Math.round(d.floatValue() * 10 - d.intValue() + 0.5f)) / 10f >= transitionZoom) {
-                zoom = transitionZoom;
-            }
-        } else if (zoom > transitionZoom){
-            // Zoom offset
-            BigDecimal d = new BigDecimal(String.valueOf(zoom));
-            if ((d.intValue() + Math.round(d.floatValue() * 100 - d.intValue())) / 100f == transitionZoom) {
-                zoom = transitionZoom;
+        if (zoom > 0.2) {
+            if (zoom != transitionZoom) {
+                zoom = (zoom * 10 + (transitionZoom-initialZoom)) / 10f;
+                // Transition from point A to B, not from the center of the map
+                offsetX = (int) ((transitionX-initialX) * ((zoom-initialZoom)/(transitionZoom-initialZoom)) + initialX);
+                offsetY = (int) ((transitionY-initialY) * ((zoom-initialZoom)/(transitionZoom-initialZoom)) + initialY);
             } else {
-                zoom -= zoom / 10f; // Transition
-                offsetX = (int) (transitionX / divider);
-                offsetY = (int) (transitionY / divider);
-                if (divider > 1)
-                    divider--;
+                initialZoom = -1.0f; // Anti zoom-spam
             }
         }
 
@@ -202,8 +194,8 @@ public class GuiSolarAtlas extends CustomGui {
                     Mouse.getDX();
                     Mouse.getDY();
                 }
-                offsetX += Mouse.getDX() * 1.5;
-                offsetY -= Mouse.getDY() * 1.5;
+                offsetX += Mouse.getDX();
+                offsetY -= Mouse.getDY();
             }
         } else {
             grab = false;
